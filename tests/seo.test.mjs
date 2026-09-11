@@ -120,7 +120,35 @@ for (const file of htmlPages()) {
   });
 }
 
+test("titles and meta descriptions are unique across all pages", () => {
+  const pages = htmlPages();
+  const titles = pages.map((f) => load(f).querySelector("title").text.trim());
+  const descs = pages.map((f) => load(f).querySelector('meta[name="description"]').getAttribute("content").trim());
+  assert.equal(new Set(titles).size, pages.length, `duplicate titles: ${titles.filter((t, i) => titles.indexOf(t) !== i).join(" | ")}`);
+  assert.equal(new Set(descs).size, pages.length, `duplicate descriptions: ${descs.filter((d, i) => descs.indexOf(d) !== i).join(" | ")}`);
+});
+
 const services = JSON.parse(readFileSync("src/_data/services.json", "utf8"));
+
+test("services.json is internally consistent", () => {
+  const slugs = services.map((s) => s.slug);
+  assert.equal(new Set(slugs).size, slugs.length, "duplicate slugs");
+  for (const s of services) {
+    assert.match(s.slug, /^[a-z0-9-]+$/, `slug ${s.slug} must be ASCII kebab-case`);
+    assert.ok(s.name && s.icon && s.blurb, `${s.slug}: name, icon and blurb required`);
+    if (s.hasPage) {
+      assert.ok(s.h1, `${s.slug}: h1 required for pages`);
+      assert.ok(existsSync(`src/ydelser/${s.slug}.md`), `${s.slug}: src/ydelser/${s.slug}.md missing`);
+      assert.ok(Array.isArray(s.related) && s.related.length >= 2, `${s.slug}: at least two related slugs`);
+      for (const r of s.related) {
+        const target = services.find((x) => x.slug === r);
+        assert.ok(target?.hasPage, `${s.slug}: related slug ${r} must point at a service with a page`);
+      }
+    } else {
+      assert.ok(!existsSync(`src/ydelser/${s.slug}.md`), `${s.slug}: hasPage is false but a page file exists`);
+    }
+  }
+});
 
 test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
   const file = "_site/index.html";
@@ -130,7 +158,6 @@ test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
 
   const business = jsonLd(root).find((ld) => typesOf(ld).includes("LocalBusiness"));
   assert.ok(business, "LocalBusiness JSON-LD missing");
-  assert.ok(typesOf(business).includes("CleaningService"));
   assert.equal(business.telephone, "+4550114714");
   assert.equal(business.vatID, "DK45626865");
   assert.ok(!jsonLd(root).some((ld) => typesOf(ld).some((t) => /Rating|Review/.test(t))), "no rating markup allowed");
@@ -190,8 +217,8 @@ for (const s of services.filter((x) => x.hasPage)) {
 
     const main = root.querySelector("main");
     assert.ok(main, "main element");
-    const count = words(main.text);
-    assert.ok(count >= 300, `service page has only ${count} words, need 300+`);
+    const count = words(root.querySelector(".page-hero .lead").text) + words(root.querySelector(".page-body").text);
+    assert.ok(count >= 300, `service page has only ${count} words of own copy (lead + body), need 300+`);
     assert.ok(main.querySelectorAll(".page-body h2").length >= 3, "at least three h2 sections in the body");
 
     const crumbs = root.querySelectorAll(".breadcrumb li").map((li) => li.text.trim());
@@ -217,7 +244,7 @@ test("/om-os/: about page with Organization JSON-LD", () => {
   assert.ok(existsSync(file), "about page not built");
   const root = load(file);
   assert.equal(root.querySelector("h1").text.trim(), "Om ECO CLEAN DK ApS");
-  const count = words(root.querySelector("main").text);
+  const count = words(root.querySelector(".page-hero .lead").text) + words(root.querySelector(".page-body").text);
   assert.ok(count >= 300, `about page has only ${count} words`);
   const org = jsonLd(root).find((ld) => typesOf(ld).includes("Organization") && ld.name === "ECO CLEAN DK ApS");
   assert.ok(org, "Organization JSON-LD missing");

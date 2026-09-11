@@ -17,7 +17,7 @@ Success criteria:
   title, meta description, canonical URL, one H1 and 300–500 words of Danish copy.
 - Lighthouse SEO score 100 on home and on one service page; performance and
   accessibility not below the current page.
-- Valid JSON-LD (LocalBusiness/CleaningService, Service, BreadcrumbList,
+- Valid JSON-LD (LocalBusiness, Service, BreadcrumbList,
   Organization) that passes Google's Rich Results Test.
 - No broken links or asset paths in the built output.
 - Visual design of the home page unchanged apart from the changes listed in section 6.
@@ -188,7 +188,7 @@ The home page keeps its current design and copy except:
 
 Rendered by `base.njk` from `site.json`, so values cannot drift from the page:
 
-- **Home**: `@type: ["LocalBusiness", "CleaningService"]` with `name`,
+- **Home**: `@type: "LocalBusiness"` (schema.org has no CleaningService type) with `name`,
   `url`, `logo`, `image`, `telephone` (+45 50 11 47 14), `email`, `vatID`
   (DK45626865), `address` (PostalAddress; street address to be supplied by
   Rado/Kristian, it is not on the current page), `areaServed` (København and

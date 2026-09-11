@@ -1,5 +1,5 @@
 ---
-title: Fitnesscentre & danselokaler i København | ECO CLEAN DK
+title: Rengøring af fitnesscentre i København | ECO CLEAN DK
 description: Rengøring af fitnesscentre og danselokaler i København med fokus på desinfektion, hygiejne og frisk luft. Miljøvenlige midler og fleksible tidspunkter.
 lead: Der skal være plads til at svede, men ikke til at glide. Vi sørger for ren, hygiejnisk og sikker rengøring af trænings- og danselokaler, så jeres medlemmer mærker forskellen.
 ---

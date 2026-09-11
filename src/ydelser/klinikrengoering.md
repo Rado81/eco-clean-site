@@ -9,6 +9,8 @@ Læge- og tandlægeklinikker, fysioterapeuter, kiropraktorer, laboratorier og an
 
 Vi arbejder efter faste tjeklister, som vi udarbejder sammen med jer ud fra klinikkens egne hygiejnekrav. Rengøringen lægges uden for behandlingstiden, så den ikke forstyrrer patienter eller personale, og det samme faste team kommer hver gang.
 
+Har I særlige ønsker til rengøringen af bestemte rum, overflader eller udstyr, aftaler vi det på forhånd og skriver det ind i rengøringsplanen, så det bliver gjort på samme måde hver gang.
+
 ## Hvad er inkluderet
 
 - Rengøring og aftørring af behandlingsrum, kontaktflader, håndtag og armaturer

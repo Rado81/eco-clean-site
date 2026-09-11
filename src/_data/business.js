@@ -1,4 +1,4 @@
-// LocalBusiness / CleaningService JSON-LD for the home page, built from site.json
+// LocalBusiness JSON-LD for the home page, built from site.json
 // so the structured data can never disagree with the visible contact details.
 import { readFileSync } from "node:fs";
 
@@ -11,7 +11,7 @@ export default function () {
 
   const business = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "CleaningService"],
+    "@type": "LocalBusiness",
     "@id": `${site.url}/#business`,
     name: site.legalName,
     alternateName: site.name,
