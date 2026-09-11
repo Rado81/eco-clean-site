@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECO CLEAN DK ApS – Erhvervsrengøring i København</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2d6a2d;
+    --green-light: #4a9a3f;
+    --green-pale: #e8f5e8;
+    --blue: #1a3a6b;
+    --blue-mid: #2255a4;
+    --blue-light: #e8eef8;
+    --gray: #6b7280;
+    --off-white: #f9faf7;
+    --white: #ffffff;
+    --shadow: 0 4px 32px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: #1a1a1a;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,106,45,0.12);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .nav-logo img { height: 48px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--blue);
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green); color: white;
+    padding: 10px 22px; border-radius: 6px;
+    text-decoration: none; font-weight: 600; font-size: 0.88rem;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--green-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f7ee 0%, #e8eef8 50%, #f0f7ee 100%);
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(74,154,63,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,58,107,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { max-width: 620px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale); border: 1px solid rgba(45,106,45,0.2);
+    color: var(--green); padding: 6px 14px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero-badge span { width: 6px; height: 6px; background: var(--green-light); border-radius: 50%; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1; color: var(--blue);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero p {
+    font-size: 1.1rem; line-height: 1.75; color: var(--gray);
+    margin-bottom: 36px; max-width: 520px;
+  }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--green); color: white;
+    padding: 14px 28px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    transition: all 0.2s; box-shadow: 0 4px 16px rgba(45,106,45,0.3);
+  }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+  .btn-secondary {
+    background: white; color: var(--blue);
+    padding: 14px 28px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    border: 2px solid rgba(26,58,107,0.2);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .hero-image {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    width: min(460px, 40vw); z-index: 1;
+    animation: floatIn 1s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(-40%) translateX(40px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 48px; padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--blue);
+  }
+  .stat-label { font-size: 0.82rem; color: var(--gray); font-weight: 500; margin-top: 2px; }
+
+  /* ECO BADGES */
+  .eco-strip {
+    background: var(--green);
+    padding: 10px 5%;
+    display: flex; align-items: center; justify-content: center; gap: 32px;
+    flex-wrap: wrap;
+  }
+  .eco-item {
+    display: flex; align-items: center; gap: 7px;
+    color: white; font-size: 0.78rem; font-weight: 500;
+  }
+  .eco-item svg { opacity: 0.9; width:16px; height:16px; }
+
+  /* SECTION COMMON */
+  section { padding: 96px 5%; }
+  .section-label {
+    display: inline-block; color: var(--green);
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--blue); line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-sub { font-size: 1.05rem; color: var(--gray); max-width: 560px; line-height: 1.7; }
+
+  /* SERVICES */
+  .services { background: var(--off-white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+  .service-card {
+    background: white; border-radius: 16px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--blue-mid));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: var(--green-pale); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; font-size: 1.5rem;
+  }
+  .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+  .service-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+
+  /* WHY US */
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: center; margin-top: 40px;
+  }
+  .why-features { display: grid; gap: 24px; }
+  .why-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .why-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--green), var(--blue-mid));
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: white; font-size: 1.1rem;
+  }
+  .why-text h4 { font-size: 1rem; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+  .why-text p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+  .why-visual {
+    background: linear-gradient(135deg, var(--green-pale), var(--blue-light));
+    border-radius: 24px; padding: 48px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .why-visual::before {
+    content: '🌿';
+    position: absolute; top: -20px; right: -20px;
+    font-size: 8rem; opacity: 0.08;
+  }
+  .price-box {
+    background: white; border-radius: 16px; padding: 32px;
+    box-shadow: var(--shadow); position: relative; z-index: 1;
+  }
+  .price-from { font-size: 0.82rem; color: var(--gray); font-weight: 500; margin-bottom: 8px; }
+  .price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900; color: var(--green);
+    line-height: 1;
+  }
+  .price-suffix { font-size: 1rem; color: var(--gray); margin-top: 6px; }
+  .price-note { font-size: 0.8rem; color: var(--gray); margin-top: 16px; padding-top: 16px; border-top: 1px solid #eee; }
+
+  /* ECO SECTION */
+  .eco-section {
+    background: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
+    color: white; text-align: center;
+  }
+  .eco-section .section-label { color: rgba(255,255,255,0.7); }
+  .eco-section .section-title { color: white; margin: 0 auto 16px; }
+  .eco-section .section-sub { color: rgba(255,255,255,0.8); margin: 0 auto 48px; }
+  .eco-cards { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  .eco-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px; padding: 32px 28px; max-width: 280px;
+    backdrop-filter: blur(8px);
+  }
+  .eco-card .icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .eco-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .eco-card p { font-size: 0.85rem; opacity: 0.8; line-height: 1.6; }
+
+  /* SKRÆDDERSYET TILBUD */
+  .custom-offer {
+    background: linear-gradient(135deg, var(--blue) 0%, #0d2347 60%, #1a4a1a 100%);
+    padding: 96px 5%; position: relative; overflow: hidden;
+  }
+  .custom-offer::before {
+    content: '';
+    position: absolute; top: -150px; right: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,154,63,0.15) 0%, transparent 70%);
+  }
+  .custom-offer::after {
+    content: '';
+    position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+  }
+  .custom-offer-inner {
+    max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+  }
+  .custom-offer .section-label { color: rgba(255,255,255,0.6); }
+  .custom-offer .section-title { color: white; margin: 0 auto 20px; }
+  .custom-offer-lead {
+    font-size: 1.15rem; color: rgba(255,255,255,0.8); line-height: 1.8;
+    max-width: 660px; margin: 0 auto 48px;
+  }
+  .offer-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-bottom: 48px;
+  }
+  .offer-step {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 32px 24px;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s;
+  }
+  .offer-step:hover { background: rgba(255,255,255,0.12); }
+  .offer-step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900;
+    color: var(--green-light); margin-bottom: 12px; line-height: 1;
+  }
+  .offer-step h4 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 8px; }
+  .offer-step p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
+  .offer-cta-row {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-white {
+    background: white; color: var(--blue);
+    padding: 16px 32px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 1rem;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.3); }
+  .btn-outline-white {
+    background: transparent; color: white;
+    padding: 16px 32px; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.35);
+    transition: all 0.2s;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  @media (max-width: 700px) {
+    .offer-steps { grid-template-columns: 1fr; }
+  }
+
+  /* CONTACT */
+  .contact { background: var(--off-white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 56px; }
+  .contact-info { display: grid; gap: 20px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: center;
+    background: white; padding: 20px 24px; border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--green-pale); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .contact-item strong { display: block; font-weight: 700; color: var(--blue); font-size: 0.95rem; }
+  .contact-item span { font-size: 0.88rem; color: var(--gray); }
+  .contact-item a { color: var(--green); text-decoration: none; font-weight: 600; }
+  .contact-form {
+    background: white; border-radius: 20px; padding: 40px;
+    box-shadow: var(--shadow);
+  }
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--blue); margin-bottom: 24px;
+  }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--blue); margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 12px 16px;
+    border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+    color: #1a1a1a; background: white;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--green);
+  }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-submit {
+    width: 100%; padding: 14px;
+    background: var(--green); color: white;
+    border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--green-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--blue);
+    color: rgba(255,255,255,0.75);
+    padding: 56px 5% 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 0.88rem; line-height: 1.75; margin-top: 16px; max-width: 320px; }
+  .footer-logo { filter: brightness(0) invert(1); height: 44px; margin-bottom: 4px; }
+  .footer-col h5 { color: white; font-weight: 700; font-size: 0.92rem; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: grid; gap: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: white; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px; display: flex; justify-content: space-between;
+    align-items: center; font-size: 0.82rem; flex-wrap: wrap; gap: 8px;
+  }
+  .footer-bottom span { color: rgba(255,255,255,0.4); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-image { display: none; }
+    .hero-content { max-width: 100%; }
+    .why-grid, .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    nav .nav-links { display: none; }
+    .hero { padding: 100px 5% 60px; }
+    .hero-stats { gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .eco-strip { gap: 20px; }
+  }
+
+  /* ===== MOBILE OPTIMERING - Android & Apple ===== */
+
+  /* Touch targets */
+  a, button { -webkit-tap-highlight-color: transparent; }
+
+  /* Nav mobile hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--blue);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 20px 5%;
+    z-index: 99;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { height: 60px; padding: 0 4%; }
+    .nav-links { display: none !important; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    .hero {
+      min-height: auto;
+      padding: 80px 4% 48px;
+    }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons a { text-align: center; width: 100%; }
+    .hero-stats { gap: 16px; flex-wrap: wrap; }
+    .stat-num { font-size: 1.6rem; }
+
+    /* Eco strip */
+    .eco-strip { gap: 12px; padding: 8px 4%; }
+    .eco-item { font-size: 0.72rem; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-card { padding: 22px 20px; }
+
+    /* Why grid */
+    .why-grid { grid-template-columns: 1fr; gap: 32px; }
+    .why-visual { padding: 28px; }
+
+    /* Contact */
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { padding: 24px 20px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+    /* Offer steps */
+    .offer-steps { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Section padding */
+    section { padding: 56px 4%; }
+
+    /* Cards 2-col on medium phones */
+    .eco-cards { flex-direction: column; }
+    .eco-card { max-width: 100%; }
+
+    /* Vision grid */
+    div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Price box */
+    .price-box { padding: 24px; }
+    .price-main { font-size: 2.8rem; }
+
+    /* Scrolling strips */
+    .tp-card { min-width: 240px; }
+
+    /* CTA buttons on mobile */
+    .offer-cta-row { flex-direction: column; align-items: center; }
+    .btn-white, .btn-outline-white { width: 100%; text-align: center; }
+  }
+
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 1.9rem; }
+    nav { height: 56px; }
+    .mobile-menu { top: 56px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" style="text-decoration:none; display:flex; align-items:center;">
+    <img src="data:image/png;base64,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" alt="ECO CLEAN DK ApS" style="height:52px; width:auto;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Ydelser</a></li>
+    <li><a href="#om-os">Om os</a></li>
+    <li><a href="#why">Hvorfor os</a></li>
+    <li><a href="#eco">Miljø</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <a href="tel:50114714" class="nav-cta">📞 50 114 714</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Ydelser</a>
+  <a href="#om-os" onclick="closeMenu()">Om os</a>
+  <a href="#why" onclick="closeMenu()">Hvorfor os</a>
+  <a href="#eco" onclick="closeMenu()">Miljø</a>
+  <a href="#contact" onclick="closeMenu()">Kontakt</a>
+  <a href="tel:50114714" style="color:var(--green); margin-top:8px;">📞 50 114 714</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Erhvervsrengøring – København og omegn</div>
+    <h1>En god start<br><em>på en god dag</em></h1>
+    <p>Vi ved, at din tid er værdifuld, og at du har brug for at fokusere på kerneopgaven. Derfor sørger vi for, at dine lokaler altid fremstår rene, indbydende og klar til en ny arbejdsdag — hver eneste dag.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Få et tilbud</a>
+      <a href="tel:50114714" class="btn-secondary">Ring 50 114 714</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Års erfaring</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">485,-</div>
+        <div class="stat-label">Timepris fra (eks. moms)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Miljøvenlige midler</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTPILOT SCROLLING STRIP -->
+<div style="background:white; padding:28px 0; overflow:hidden; border-bottom:1px solid rgba(0,0,0,0.06); position:relative;">
+  <div style="text-align:center; margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:10px;">
+    <span style="font-size:0.8rem; font-weight:700; color:#00b67a; letter-spacing:0.08em; text-transform:uppercase;">Trustpilot</span>
+    <span style="color:#00b67a; font-size:1.1rem;">★★★★★</span>
+    <span style="font-size:0.82rem; color:var(--gray);">4.8 ud af 5</span>
+  </div>
+
+  <style>
+    .tp-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .tp-wrapper::before,
+    .tp-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .tp-wrapper::before { left: 0; background: linear-gradient(to right, white, transparent); }
+    .tp-wrapper::after  { right: 0; background: linear-gradient(to left, white, transparent); }
+    .tp-track {
+      display: flex;
+      gap: 16px;
+      animation: tp-scroll 30s linear infinite;
+      width: max-content;
+    }
+    .tp-track:hover { animation-play-state: paused; }
+    @keyframes tp-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .tp-card {
+      background: var(--off-white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 18px 24px;
+      min-width: 280px;
+      max-width: 300px;
+      flex-shrink: 0;
+    }
+    .tp-stars { color: #00b67a; font-size: 1rem; margin-bottom: 8px; }
+    .tp-text { font-size: 0.84rem; color: var(--gray); line-height: 1.6; font-style: italic; margin-bottom: 12px; }
+    .tp-author { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
+    .tp-role { font-size: 0.75rem; color: var(--gray); }
+  
+  /* ===== MOBILE OPTIMERING - Android & Apple ===== */
+
+  /* Touch targets */
+  a, button { -webkit-tap-highlight-color: transparent; }
+
+  /* Nav mobile hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--blue);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 20px 5%;
+    z-index: 99;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { height: 60px; padding: 0 4%; }
+    .nav-links { display: none !important; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    .hero {
+      min-height: auto;
+      padding: 80px 4% 48px;
+    }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons a { text-align: center; width: 100%; }
+    .hero-stats { gap: 16px; flex-wrap: wrap; }
+    .stat-num { font-size: 1.6rem; }
+
+    /* Eco strip */
+    .eco-strip { gap: 12px; padding: 8px 4%; }
+    .eco-item { font-size: 0.72rem; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-card { padding: 22px 20px; }
+
+    /* Why grid */
+    .why-grid { grid-template-columns: 1fr; gap: 32px; }
+    .why-visual { padding: 28px; }
+
+    /* Contact */
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { padding: 24px 20px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+    /* Offer steps */
+    .offer-steps { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Section padding */
+    section { padding: 56px 4%; }
+
+    /* Cards 2-col on medium phones */
+    .eco-cards { flex-direction: column; }
+    .eco-card { max-width: 100%; }
+
+    /* Vision grid */
+    div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Price box */
+    .price-box { padding: 24px; }
+    .price-main { font-size: 2.8rem; }
+
+    /* Scrolling strips */
+    .tp-card { min-width: 240px; }
+
+    /* CTA buttons on mobile */
+    .offer-cta-row { flex-direction: column; align-items: center; }
+    .btn-white, .btn-outline-white { width: 100%; text-align: center; }
+  }
+
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 1.9rem; }
+    nav { height: 56px; }
+    .mobile-menu { top: 56px; }
+  }
+
+</style>
+
+  <div class="tp-wrapper">
+    <div class="tp-track">
+      <!-- Duplicate first for seamless reverse scroll -->
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Altid punktlige og grundige. Vores kontor skinner efter hver rengøring!"</p><div class="tp-author">Maria Hansen</div><div class="tp-role">Office Manager, København</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Brugt dem i 2 år. Miljøvenlige midler og super service hver gang."</p><div class="tp-author">Thomas Nielsen</div><div class="tp-role">Caféejer, Frederiksberg</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Utroligt dygtige — tager vores kliniks hygiejnekrav meget seriøst."</p><div class="tp-author">Sara Larsen</div><div class="tp-role">Klinikchef, Østerbro</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Fleksible og pålidelige. De tilpasser sig altid vores skiftende behov."</p><div class="tp-author">Peter Madsen</div><div class="tp-role">Ejendomsadministrator, Valby</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Vores fitnesscenter er altid rent og friskt. Gæsterne bemærker det!"</p><div class="tp-author">Lene Christensen</div><div class="tp-role">Centerleder, Amager</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Professionel og venlig betjening. Vi anbefaler ECO CLEAN til alle!"</p><div class="tp-author">Anders Holm</div><div class="tp-role">Direktør, Hellerup</div></div>
+      <!-- Duplicate set -->
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Altid punktlige og grundige. Vores kontor skinner efter hver rengøring!"</p><div class="tp-author">Maria Hansen</div><div class="tp-role">Office Manager, København</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Brugt dem i 2 år. Miljøvenlige midler og super service hver gang."</p><div class="tp-author">Thomas Nielsen</div><div class="tp-role">Caféejer, Frederiksberg</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Utroligt dygtige — tager vores kliniks hygiejnekrav meget seriøst."</p><div class="tp-author">Sara Larsen</div><div class="tp-role">Klinikchef, Østerbro</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Fleksible og pålidelige. De tilpasser sig altid vores skiftende behov."</p><div class="tp-author">Peter Madsen</div><div class="tp-role">Ejendomsadministrator, Valby</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Vores fitnesscenter er altid rent og friskt. Gæsterne bemærker det!"</p><div class="tp-author">Lene Christensen</div><div class="tp-role">Centerleder, Amager</div></div>
+      <div class="tp-card"><div class="tp-stars">★★★★★</div><p class="tp-text">"Professionel og venlig betjening. Vi anbefaler ECO CLEAN til alle!"</p><div class="tp-author">Anders Holm</div><div class="tp-role">Direktør, Hellerup</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ECO STRIP -->
+<div class="eco-strip">
+  <div class="eco-item">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    Svanemærket & EU Blomst produkter, midler og materialer
+  </div>
+  <div class="eco-item">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Dygtige & erfarne medarbejdere
+  </div>
+  <div class="eco-item">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    CVR: 45626865
+  </div>
+</div>
+
+<!-- KUNDER SCROLLING STRIP -->
+<div style="background:white; padding:20px 0; overflow:hidden; border-bottom:1px solid rgba(0,0,0,0.06); position:relative;">
+  <style>
+    .kunde-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .kunde-wrapper::before,
+    .kunde-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .kunde-wrapper::before { left: 0; background: linear-gradient(to right, white, transparent); }
+    .kunde-wrapper::after  { right: 0; background: linear-gradient(to left, white, transparent); }
+    .kunde-track {
+      display: flex;
+      gap: 12px;
+      animation: kunde-scroll 25s linear infinite;
+      width: max-content;
+    }
+    .kunde-track:hover { animation-play-state: paused; }
+    @keyframes kunde-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .kunde-item {
+      background: var(--off-white);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 10px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .kunde-item span.ki { font-size: 1.2rem; }
+    .kunde-item span.kl { font-size: 0.85rem; font-weight: 600; color: var(--blue); }
+  
+  /* ===== MOBILE OPTIMERING - Android & Apple ===== */
+
+  /* Touch targets */
+  a, button { -webkit-tap-highlight-color: transparent; }
+
+  /* Nav mobile hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--blue);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 20px 5%;
+    z-index: 99;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { height: 60px; padding: 0 4%; }
+    .nav-links { display: none !important; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    .hero {
+      min-height: auto;
+      padding: 80px 4% 48px;
+    }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero-buttons { flex-direction: column; }
+    .hero-buttons a { text-align: center; width: 100%; }
+    .hero-stats { gap: 16px; flex-wrap: wrap; }
+    .stat-num { font-size: 1.6rem; }
+
+    /* Eco strip */
+    .eco-strip { gap: 12px; padding: 8px 4%; }
+    .eco-item { font-size: 0.72rem; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-card { padding: 22px 20px; }
+
+    /* Why grid */
+    .why-grid { grid-template-columns: 1fr; gap: 32px; }
+    .why-visual { padding: 28px; }
+
+    /* Contact */
+    .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { padding: 24px 20px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+    /* Offer steps */
+    .offer-steps { grid-template-columns: 1fr; gap: 14px; }
+
+    /* Section padding */
+    section { padding: 56px 4%; }
+
+    /* Cards 2-col on medium phones */
+    .eco-cards { flex-direction: column; }
+    .eco-card { max-width: 100%; }
+
+    /* Vision grid */
+    div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns: repeat(3, 1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Price box */
+    .price-box { padding: 24px; }
+    .price-main { font-size: 2.8rem; }
+
+    /* Scrolling strips */
+    .tp-card { min-width: 240px; }
+
+    /* CTA buttons on mobile */
+    .offer-cta-row { flex-direction: column; align-items: center; }
+    .btn-white, .btn-outline-white { width: 100%; text-align: center; }
+  }
+
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 1.9rem; }
+    nav { height: 56px; }
+    .mobile-menu { top: 56px; }
+  }
+
+</style>
+
+  <div class="kunde-wrapper">
+    <div class="kunde-track">
+      <div class="kunde-item"><span class="ki">🏢</span><span class="kl">Kontorer</span></div>
+      <div class="kunde-item"><span class="ki">🍽️</span><span class="kl">Restauranter</span></div>
+      <div class="kunde-item"><span class="ki">🏥</span><span class="kl">Klinikker</span></div>
+      <div class="kunde-item"><span class="ki">💪</span><span class="kl">Fitnesscentre</span></div>
+      <div class="kunde-item"><span class="ki">🏘️</span><span class="kl">Boligforeninger</span></div>
+      <div class="kunde-item"><span class="ki">✨</span><span class="kl">Showrooms</span></div>
+      <div class="kunde-item"><span class="ki">🚌</span><span class="kl">Transport</span></div>
+      <div class="kunde-item"><span class="ki">🏗️</span><span class="kl">Byggeprojekter</span></div>
+      <div class="kunde-item"><span class="ki">☕</span><span class="kl">Caféer</span></div>
+      <div class="kunde-item"><span class="ki">🕺</span><span class="kl">Danseskoler</span></div>
+      <div class="kunde-item"><span class="ki">🏨</span><span class="kl">Kontorhoteller</span></div>
+      <div class="kunde-item"><span class="ki">🧪</span><span class="kl">Laboratorier</span></div>
+      <!-- Duplicate -->
+      <div class="kunde-item"><span class="ki">🏢</span><span class="kl">Kontorer</span></div>
+      <div class="kunde-item"><span class="ki">🍽️</span><span class="kl">Restauranter</span></div>
+      <div class="kunde-item"><span class="ki">🏥</span><span class="kl">Klinikker</span></div>
+      <div class="kunde-item"><span class="ki">💪</span><span class="kl">Fitnesscentre</span></div>
+      <div class="kunde-item"><span class="ki">🏘️</span><span class="kl">Boligforeninger</span></div>
+      <div class="kunde-item"><span class="ki">✨</span><span class="kl">Showrooms</span></div>
+      <div class="kunde-item"><span class="ki">🚌</span><span class="kl">Transport</span></div>
+      <div class="kunde-item"><span class="ki">🏗️</span><span class="kl">Byggeprojekter</span></div>
+      <div class="kunde-item"><span class="ki">☕</span><span class="kl">Caféer</span></div>
+      <div class="kunde-item"><span class="ki">🕺</span><span class="kl">Danseskoler</span></div>
+      <div class="kunde-item"><span class="ki">🏨</span><span class="kl">Kontorhoteller</span></div>
+      <div class="kunde-item"><span class="ki">🧪</span><span class="kl">Laboratorier</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="fade-up">
+    <span class="section-label">Vores ydelser</span>
+    <h2 class="section-title">Alt inden for erhvervsrengøring</h2>
+    <p class="section-sub">Vi tilbyder professionel erhvervsrengøring til virksomheder i København og omegn. Det eneste private vi laver er ind- og udflytningsrengøring samt dødsborengøring.</p>
+  </div>
+  <div class="services-grid fade-up">
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3>Kontorrengøring</h3>
+      <p>Grundig og diskret rengøring af kontorer, kontorhoteller og bureauer. Vi tilpasser os jeres behov og arbejdstider.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🍽️</div>
+      <h3>Restaurant & Café</h3>
+      <p>Professionel rengøring af restauranter og caféer med fokus på hygiejne og fødevaresikkerhed.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <h3>Klinikker</h3>
+      <p>Højt hygiejneniveau til klinikker og sundhedsfaciliteter, hvor renlighed er afgørende.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💪</div>
+      <h3>Fitnesscentre & Danselokaler</h3>
+      <p>Effektiv rengøring af træningsfaciliteter og danselokaler med fokus på desinfektion og frisk luft.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3>Showroom</h3>
+      <p>Præsentabel og detaljefokuseret rengøring af showrooms og udstillingslokaler.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪟</div>
+      <h3>Trappevask & Vinduespudsning</h3>
+      <p>Grundig rengøring af trapper og professionel vinduespudsning for det perfekte udtryk.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <h3>Ind- & Udflytningsrengøring</h3>
+      <p>Vi laver ind- og udflytningsrengøring for både private og erhverv. Grundig afleveringsrengøring og istandsættelse — så alt er klar til næste lejer eller køber.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔨</div>
+      <h3>Rengøring efter håndværkere</h3>
+      <p>Grundig oprydning og rengøring efter bygge- og renoveringsarbejde. Støv og snavs er vores speciale.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚌</div>
+      <h3>Busrengøring</h3>
+      <p>Professionel ind- og udvendig rengøring af busser og større køretøjer.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <h3>Social rengøring</h3>
+      <p>Vi samarbejder med kommuner, boligforeninger og institutioner om social rengøring — en indsats der udføres med nærvær, respekt og diskretion.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🕊️</div>
+      <h3>Dødsborengøring</h3>
+      <p>En skånsom og respektfuld tømning og rengøring af bolig efter dødsfald. Vi håndterer opgaven med stor omhu og takt, så pårørende slipper for en svær byrde.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKRÆDDERSYET TILBUD -->
+<section class="custom-offer">
+  <div class="custom-offer-inner fade-up">
+    <span class="section-label">Tilpasset løsning</span>
+    <h2 class="section-title">Vi skræddersyer et tilbud<br>til netop jeres behov</h2>
+    <p class="custom-offer-lead">Ingen virksomheder er ens — og det skal jeres rengøringsløsning heller ikke være. Vi lytter til jeres unikke ønsker, udfordringer og mål, og sammensætter præcis den løsning der passer til jer.</p>
+
+    <div class="offer-steps">
+      <div class="offer-step">
+        <h4>Vi lytter til jer</h4>
+        <p>Vi starter med en uforpligtende snak om jeres virksomhed, lokaler og specifikke behov — ingen standardløsninger.</p>
+      </div>
+      <div class="offer-step">
+        <h4>Vi tilpasser løsningen</h4>
+        <p>Ud fra jeres ønsker sammensætter vi ydelser, frekvens og tidspunkter der passer perfekt til jeres hverdag og budget.</p>
+      </div>
+      <div class="offer-step">
+        <h4>Langvarigt samarbejde</h4>
+        <p>Vi opbygger et personligt kendskab til jer og justerer løbende, så I altid får præcis det I har brug for.</p>
+      </div>
+    </div>
+
+    <div class="offer-cta-row">
+      <a href="#contact" class="btn-white">Få jeres skræddersyede tilbud</a>
+      <a href="tel:50114714" class="btn-outline-white">📞 Ring 50 114 714</a>
+    </div>
+  </div>
+</section>
+
+<!-- VI HJÆLPER -->
+<section style="padding:80px 5%; background:white;">
+  <div class="fade-up" style="max-width:1100px; margin:0 auto;">
+    <span class="section-label">Vi hjælper blandt andet</span>
+    <h2 class="section-title">Hvem arbejder vi med?</h2>
+    <p class="section-sub">Vi har mange år erfaring på tværs af brancher — her er nogle af dem vi hjælper til daglig.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:44px;">
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:var(--off-white); border-radius:16px; padding:28px; border:1px solid rgba(0,0,0,0.06);">
+        <div style="width:52px; height:52px; border-radius:12px; background:var(--green-pale); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0;">🏘️</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:8px;">Boligselskaber & boligforeninger</h4>
+          <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">Flytterengøring, istandsættelse, trappevask og vinduespudsning — vi sørger for at ejendommen altid fremstår præsentabel og klar.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:var(--off-white); border-radius:16px; padding:28px; border:1px solid rgba(0,0,0,0.06);">
+        <div style="width:52px; height:52px; border-radius:12px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0;">☕</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:8px;">Kontorer, kontorhoteller & caféer</h4>
+          <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">Der skal være rent både foran og bag disken. Vi leverer grundig og diskret rengøring tilpasset jeres åbningstider og behov.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:var(--off-white); border-radius:16px; padding:28px; border:1px solid rgba(0,0,0,0.06);">
+        <div style="width:52px; height:52px; border-radius:12px; background:var(--green-pale); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0;">💪</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:8px;">Fitnesscentre & dansesale</h4>
+          <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">Der skal være plads til at svede — men ikke glide. Vi sørger for ren, hygiejnisk og sikker rengøring af trænings- og danselokaler.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:20px; align-items:flex-start; background:var(--off-white); border-radius:16px; padding:28px; border:1px solid rgba(0,0,0,0.06);">
+        <div style="width:52px; height:52px; border-radius:12px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0;">✨</div>
+        <div>
+          <h4 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:8px;">Showrooms, bureauer & social rengøring</h4>
+          <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">Vi tilbyder også showroom-rengøring, bureauer og social rengøring — altid med samme høje standard og personlige tilgang.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VÆRDIER & KONCEPT -->
+<section style="padding:96px 5%; background:linear-gradient(135deg,#f0f7ee 0%,#e8eef8 100%);">
+  <div class="fade-up" style="max-width:1100px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:56px;">
+      <span class="section-label">Vores DNA</span>
+      <h2 class="section-title">Kvalitet er vores kodeord</h2>
+      <p style="font-size:1.05rem; color:var(--gray); line-height:1.8; max-width:700px; margin:0 auto;">Hos ECO CLEAN DK ApS er kvalitet ikke bare et ord — det er fundamentet for alt vi gør. Vi arbejder ud fra én klar værdi: daglig rengøring, daglig synlighed og daglig kontrol.</p>
+    </div>
+
+    <!-- Koncept kort -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:40px;">
+      <div style="background:white; border-radius:16px; padding:32px 28px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04); text-align:center;">
+        <div style="width:60px; height:60px; background:var(--green-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 16px;">🧹</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1rem; color:var(--blue); margin-bottom:10px;">Selve rengøringen</h4>
+        <p style="font-size:0.86rem; color:var(--gray); line-height:1.7;">Grundig, konsekvent og detaljeorienteret rengøring — hver dag, uden kompromis. Vi sætter standarden og holder den.</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:32px 28px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04); text-align:center;">
+        <div style="width:60px; height:60px; background:var(--green-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 16px;">🌿</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1rem; color:var(--blue); margin-bottom:10px;">Miljøvenlige midler & artikler</h4>
+        <p style="font-size:0.86rem; color:var(--gray); line-height:1.7;">Vi bruger udelukkende Svanemærket og EU Blomst-godkendte produkter, midler og materialer — sikre for mennesker og natur.</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:32px 28px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04); text-align:center;">
+        <div style="width:60px; height:60px; background:var(--green-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin:0 auto 16px;">💬</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1rem; color:var(--blue); margin-bottom:10px;">Personlig service & kommunikation</h4>
+        <p style="font-size:0.86rem; color:var(--gray); line-height:1.7;">Den gode dialog er kernen i alt vi gør. Vi tror på, at åbenhed og ærlighed skaber bedre kvalitet, tilfredse medarbejdere og endnu flere glade kunder.</p>
+      </div>
+    </div>
+
+    <!-- Åbenhed & ærlighed fremhævet -->
+    <div style="background:var(--blue); border-radius:20px; padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:white; margin-bottom:16px; line-height:1.3;">Åbenhed og ærlighed<br>er vores fundament</h3>
+        <p style="font-size:0.95rem; color:rgba(255,255,255,0.8); line-height:1.8; margin-bottom:20px;">Vi går fuldt ind for åbenhed og ærlighed — fordi en god dialog giver højere kvalitet, tilfredse medarbejdere og endnu flere tilfredse kunder.</p>
+        <p style="font-size:0.95rem; color:rgba(255,255,255,0.8); line-height:1.8;">Vores koncept er bygget på det grundlæggende: kvalitetsrengøring, miljøvenlige midler, personlig service og den gode kommunikation.</p>
+      </div>
+      <div style="display:grid; gap:14px;">
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:18px 22px; display:flex; gap:14px; align-items:center;">
+          <span style="font-size:1.3rem;">👁️</span>
+          <div>
+            <div style="font-weight:700; color:white; font-size:0.9rem; margin-bottom:3px;">Daglig synlighed</div>
+            <div style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Vi er til stede og synlige — I kan altid se og mærke vores arbejde</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:18px 22px; display:flex; gap:14px; align-items:center;">
+          <span style="font-size:1.3rem;">✅</span>
+          <div>
+            <div style="font-weight:700; color:white; font-size:0.9rem; margin-bottom:3px;">Daglig kontrol</div>
+            <div style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Vi følger op og sikrer at standarden holdes — hver dag</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:18px 22px; display:flex; gap:14px; align-items:center;">
+          <span style="font-size:1.3rem;">💰</span>
+          <div>
+            <div style="font-weight:700; color:white; font-size:0.9rem; margin-bottom:3px;">Høj kvalitet til fornuftige priser</div>
+            <div style="font-size:0.82rem; color:rgba(255,255,255,0.65);">Professionel erhvervsrengøring — uden at det behøver koste en formue</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OM OS -->
+<section id="om-os" style="background:var(--off-white); padding:96px 5%;">
+  <div class="fade-up" style="max-width:1100px; margin:0 auto;">
+    <span class="section-label">Vores historie & mission</span>
+    <h2 class="section-title">Vi startede fordi vi<br>så et behov</h2>
+    <p class="section-sub">Vi startede eco-clean.nu fordi vi så et behov for et rengøringsfirma, der kombinerer erfaring, pålidelighed og en personlig tilgang til hver kunde. Vores mission er at skabe kvalitetsrengøring og sunde miljøer, der gør en reel forskel for vores kunders hverdag.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-top:48px;">
+      <div style="background:white; border-radius:16px; padding:32px; border:1px solid rgba(0,0,0,0.06); border-top:3px solid var(--green);">
+        <div style="font-size:2rem; margin-bottom:16px;">🏠</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--blue); margin-bottom:10px;">Familieejet virksomhed</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7;">Vi er et familieejet rengøringsfirma med base i København. Vi servicerer København og omegn med personlig service og nærhed som fundament.</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:32px; border:1px solid rgba(0,0,0,0.06); border-top:3px solid var(--blue-mid);">
+        <div style="font-size:2rem; margin-bottom:16px;">👥</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--blue); margin-bottom:10px;">Engagerede & kompetente medarbejdere</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7;">Vores team består af engagerede og kompetente medarbejdere, der hver dag møder ind med en positiv tilgang og et smil — med over 20 års erfaring i branchen.</p>
+      </div>
+      <div style="background:white; border-radius:16px; padding:32px; border:1px solid rgba(0,0,0,0.06); border-top:3px solid #c8922a;">
+        <div style="font-size:2rem; margin-bottom:16px;">🌱</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--blue); margin-bottom:10px;">Tre kerneværdier</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7;">Vi bygger vores virksomhed på <strong>kvalitet</strong>, <strong>pålidelighed</strong> og <strong>bæredygtighed</strong>. Vi bruger miljøvenlige midler og metoder for at mindske vores miljøpåvirkning.</p>
+      </div>
+    </div>
+
+    <!-- Lang om-os tekst -->
+    <div style="background:white; border-radius:20px; padding:48px; margin-top:32px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--blue); margin-bottom:24px; line-height:1.3;">Engagerede medarbejdere,<br>personlig service og høj kvalitet</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+        <div>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85; margin-bottom:18px;">ECO CLEAN DK ApS er en virksomhed med 20 års erfaring, som består af engagerede og kompetente medarbejdere, der hver dag møder ind med en positiv tilgang til vores opgaver. Vi sætter stabilitet og tillid i højsædet, og vi har derfor altid stabile og dygtige medarbejdere, der yder deres bedste.</p>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85; margin-bottom:18px;">Vi er her for vores kunder, og vi vil gerne gøre det bedste for dem gennem fornuftige priser, høj kvalitet og stor fleksibilitet. Vi sørger for hele tiden at udvikle vores medarbejdere, så de bliver ved med at være så dygtige som de er — vi stiller os ikke tilfredse med halvhjertet rengøring.</p>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85;">Vi er meget bevidste om, at through høj service, kvalitet og tillid opbygges et længerevarende samarbejde. Alle kunder har en <strong style="color:var(--blue);">personlig kontaktperson</strong>, som har ansvar for deres opgave, og som kunden altid kan få fat på med et direkte mobilnummer og mail.</p>
+        </div>
+        <div>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85; margin-bottom:18px;">Hos ECO CLEAN DK ApS har vi udelukkende positive medarbejdere, der har let til smil. Vi prioriterer det høje serviceniveau, og derfor kan vi altid tilbyde vores kunder et rengøringsteam, der er glade og behjælpelige.</p>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85; margin-bottom:18px;">Vi sætter en ære i at have et godt samarbejde med vores kunder, og vi vil gerne skabe grobund for dette ved et <strong style="color:var(--blue);">personligt opstartsmøde med kaffe og kage</strong>. Vi arbejder både professionelt og personligt, da vi tror på, at det er en forudsætning for et godt samarbejde.</p>
+          <p style="font-size:0.95rem; color:var(--gray); line-height:1.85;">Når du er glad og tilfreds, er vi det samme — og vi vil gøre alt, hvad vi kan for at lette din arbejdsbyrde og gøre din hverdag en smule nemmere og lidt sjovere.</p>
+        </div>
+      </div>
+
+      <!-- Ydelsesliste -->
+      <div style="margin-top:32px; padding-top:28px; border-top:1px solid rgba(0,0,0,0.07);">
+        <p style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); margin-bottom:14px;">Alt inden for erhvervsrengøring</p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <span style="background:var(--green-pale); color:var(--green); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Kontor</span>
+          <span style="background:var(--green-pale); color:var(--green); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Bureauer</span>
+          <span style="background:var(--green-pale); color:var(--green); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Showroom</span>
+          <span style="background:var(--green-pale); color:var(--green); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Kontorhoteller</span>
+          <span style="background:var(--blue-light); color:var(--blue-mid); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Trappevask</span>
+          <span style="background:var(--blue-light); color:var(--blue-mid); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Klinikker</span>
+          <span style="background:var(--blue-light); color:var(--blue-mid); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Danselokaler</span>
+          <span style="background:var(--blue-light); color:var(--blue-mid); padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Træningscenter</span>
+          <span style="background:#fef4e4; color:#c8922a; padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Institutter</span>
+          <span style="background:#fef4e4; color:#c8922a; padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Café & Restaurant</span>
+          <span style="background:#fef4e4; color:#c8922a; padding:6px 14px; border-radius:20px; font-size:0.82rem; font-weight:600;">Vinduespudsning</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--green-pale),var(--blue-light)); border-radius:20px; padding:40px 48px; margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--blue); margin-bottom:16px; line-height:1.3;">Det er de små detaljer,<br>der gør den store forskel</h3>
+        <p style="font-size:0.92rem; color:var(--gray); line-height:1.75;">Vi er kendte for at være helt nede på jorden — og for vores fleksibilitet og evne til at levere på tid, hver gang. Vores team er trænet i at levere konsekvent høj kvalitet, og vi tilpasser vores services efter hver enkelt kundes behov.</p>
+      </div>
+      <div style="display:grid; gap:14px;">
+        <div style="display:flex; gap:12px; align-items:center; background:white; padding:14px 18px; border-radius:10px;">
+          <span style="font-size:1.2rem;">✅</span>
+          <span style="font-size:0.88rem; color:var(--gray);">Personlig kontaktperson med direkte mobilnummer</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center; background:white; padding:14px 18px; border-radius:10px;">
+          <span style="font-size:1.2rem;">✅</span>
+          <span style="font-size:0.88rem; color:var(--gray);">Opstartsmøde med kaffe og kage</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center; background:white; padding:14px 18px; border-radius:10px;">
+          <span style="font-size:1.2rem;">✅</span>
+          <span style="font-size:0.88rem; color:var(--gray);">Daglig, ugentlig eller månedlig rengøring efter aftale</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center; background:white; padding:14px 18px; border-radius:10px;">
+          <span style="font-size:1.2rem;">✅</span>
+          <span style="font-size:0.88rem; color:var(--gray);">Miljøvenlige rengøringsmidler — sikre for mennesker og miljø</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="fade-up">
+    <span class="section-label">Hvem er vi</span>
+    <h2 class="section-title">En familiedrevet virksomhed<br>med et stærkt og loyalt team</h2>
+    <p class="section-sub" style="max-width:680px">Vi er en familiedrevet rengøringsvirksomhed med et stærkt og loyalt team. Vores kunder bliver hos os i mange år, fordi vi forstår at levere en god start på dagen — hver eneste dag.</p>
+  </div>
+  <div class="why-grid fade-up">
+    <div class="why-features">
+      <div style="margin-bottom:28px">
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--blue); margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--green-light);">Derfor vælger vores kunder os:</h3>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">🏢</div>
+        <div class="why-text">
+          <h4>Professionel kontorrengøring</h4>
+          <p>Professionel rengøring af kontormiljøer, kontorhoteller og bureauer — grundig, diskret og detaljefokuseret.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">🔄</div>
+        <div class="why-text">
+          <h4>Fast aftale eller efter behov</h4>
+          <p>Du vælger selv — fast ugentlig aftale eller ekstra rengøring efter behov. Vi er fleksible og tilpasser os dit skema.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">🌱</div>
+        <div class="why-text">
+          <h4>Svanemærket & EU Blomst-midler</h4>
+          <p>Miljøvenlige, svanemærket og EU-blomstmærket produkter, midler og materialer i hele vores arbejde.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">✨</div>
+        <div class="why-text">
+          <h4>Rene og indbydende rammer</h4>
+          <p>Vi sikrer rene og indbydende omgivelser for dine medarbejdere og gæster — hver dag, fra første dag.</p>
+        </div>
+      </div>
+      <div class="why-feature">
+        <div class="why-icon">⭐</div>
+        <div class="why-text">
+          <h4>Mere end 20 års brancheerfaring</h4>
+          <p>Hos ECO CLEAN DK ApS har vi over 20 års erfaring med professionel kvalitetsrengøring til københavnske virksomheder med høje kvalitetskrav.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="price-box">
+        <div style="font-size:1.3rem; font-weight:800; color:var(--blue); font-family:'Playfair Display',serif; margin-bottom:12px; line-height:1.3">Må vi også<br>hjælpe dig?</div>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; margin-bottom:16px">Vi kommer gerne ud til en gratis gennemgang af jeres rengøringsbehov — og vi tager selvfølgelig en æske snøfler med til kaffen.</p>
+        <div class="price-from">Timepriser starter fra</div>
+        <div class="price-main">485,-</div>
+        <div class="price-suffix">DKK ekskl. moms</div>
+        <a href="#contact" class="btn-primary" style="display:block; text-align:center; margin-top:20px;">Book gratis gennemgang</a>
+        <a href="tel:50114714" style="display:block; text-align:center; margin-top:10px; font-size:0.88rem; color:var(--green); font-weight:700; text-decoration:none;">📞 50 114 714</a>
+      </div>
+      <p style="margin-top:20px; font-size:0.85rem; color:var(--gray); font-style:italic; line-height:1.6;">💚 Vi lever af glade og tilfredse kunder</p>
+    </div>
+  </div>
+</section>
+
+<!-- ECO -->
+<section class="eco-section" id="eco">
+  <div class="fade-up">
+    <span class="section-label">Miljø & bæredygtighed</span>
+    <h2 class="section-title">Vi rengør med omtanke for miljøet</h2>
+    <p class="section-sub">Vi går ind for at gøre en forskel — miljøvenligt, bevidst og ansvarligt. Det er ikke bare ord, det er vores tilgang til alt, hvad vi gør.</p>
+  </div>
+  <div class="eco-cards fade-up">
+    <div class="eco-card">
+      <div class="icon">🦢</div>
+      <h4>Svanemærket</h4>
+      <p>Vi anvender Svanemærket produkter, rengøringsmidler og materialer i vores daglige arbejde — det nordiske miljømærke der garanterer bæredygtighed i hele processen.</p>
+    </div>
+    <div class="eco-card">
+      <div class="icon">🌸</div>
+      <h4>EU Blomst</h4>
+      <p>Vi bruger EU Blomst-godkendte produkter, rengøringsmidler og midler — der sikrer at alt vi anvender lever op til de strenge europæiske miljø- og kvalitetskrav.</p>
+    </div>
+    <div class="eco-card">
+      <div class="icon">♻️</div>
+      <h4>Ressourcebevidst</h4>
+      <p>Vi arbejder aktivt med at reducere ressourceforbrug og minimere vores miljøaftryk i alle aspekter af vores arbejde.</p>
+    </div>
+  </div>
+
+  <!-- Team Trees & Team Seas -->
+  <div class="fade-up" style="margin-top:48px; max-width:900px; margin-left:auto; margin-right:auto;">
+    <p style="font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.6); text-align:center; margin-bottom:12px;">Vi støtter globale initiativer</p>
+    <p style="font-size:0.95rem; color:rgba(255,255,255,0.75); text-align:center; max-width:700px; margin:0 auto 32px; line-height:1.7;">Hos ECO CLEAN DK ApS tror vi på, at et ansvarligt erhvervsliv kan gøre en reel forskel — for planeten, for de fattige og for kommende generationer. Derfor støtter vi aktivt disse initiativer:</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+      <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:32px; display:flex; gap:20px; align-items:flex-start; backdrop-filter:blur(8px);">
+        <img src="/mnt/user-data/uploads/1000031956.png" alt="Team Trees" style="width:72px; height:72px; object-fit:contain; border-radius:50%; flex-shrink:0; background:white; padding:6px;">
+        <div>
+          <h4 style="font-weight:800; font-size:1rem; color:white; margin-bottom:8px;">#TeamTrees 🌳</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.7;">Vi støtter #TeamTrees, der planter træer verden over for at bekæmpe afskovning og klimaforandringer. Hvert træ er et skridt mod en grønnere og mere bæredygtig planet for kommende generationer.</p>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:32px; display:flex; gap:20px; align-items:flex-start; backdrop-filter:blur(8px);">
+        <img src="/mnt/user-data/uploads/1000031957.png" alt="Team Seas" style="width:72px; height:72px; object-fit:contain; border-radius:50%; flex-shrink:0; background:white; padding:6px;">
+        <div>
+          <h4 style="font-weight:800; font-size:1rem; color:white; margin-bottom:8px;">#TeamSeas 🌊</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.7;">Vi støtter #TeamSeas, der renser verdens have og strande for plastik og affald. Fordi rene have er afgørende for livet på jorden — og fordi rent vand er en menneskeret for alle, rige som fattige.</p>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:32px; display:flex; gap:20px; align-items:flex-start; backdrop-filter:blur(8px);">
+        <img src="/mnt/user-data/uploads/1000032084.jpg" alt="Novak Djokovic Foundation" style="width:72px; height:72px; object-fit:cover; border-radius:50%; flex-shrink:0; background:white; padding:4px;">
+        <div>
+          <h4 style="font-weight:800; font-size:1rem; color:white; margin-bottom:8px;">Novak Djokovic Foundation 🎓</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.7;">Vi støtter Novak Djokovic Foundation, som giver børn i verdens fattigste samfund adgang til tidlig uddannelse og bedre fremtidsmuligheder. En bedre verden begynder med at investere i børnene.</p>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:32px; display:flex; gap:20px; align-items:flex-start; backdrop-filter:blur(8px);">
+        <div style="width:72px; height:72px; border-radius:50%; flex-shrink:0; background:white; padding:8px; display:flex; align-items:center; justify-content:center; font-size:2rem;">🌍</div>
+        <div>
+          <h4 style="font-weight:800; font-size:1rem; color:white; margin-bottom:8px;">FN's 17 Verdensmål</h4>
+          <p style="font-size:0.85rem; color:rgba(255,255,255,0.8); line-height:1.7;">Vi arbejder i overensstemmelse med FN's 17 verdensmål for bæredygtig udvikling — bl.a. rent vand, ansvarligt forbrug, klimaindsats og reduktion af ulighed. Vi tror på, at selv et rengøringsfirma kan bidrage til en bedre og mere retfærdig verden.</p>
+        </div>
+      </div>
+
+    </div>
+    <p style="text-align:center; font-size:1.05rem; color:white; margin-top:28px; font-weight:700; line-height:1.7; padding:20px 32px; background:rgba(255,255,255,0.12); border-radius:12px; border:1px solid rgba(255,255,255,0.25);">💚 For os handler miljøansvar ikke kun om de rengøringsmidler vi bruger — det handler om at bidrage til en bedre verden.</p>
+  </div>
+</section>
+
+<!-- VISION -->
+<section style="padding:96px 5%; background:white;">
+  <div class="fade-up" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+    <div>
+      <span class="section-label">Fremtid & vision</span>
+      <h2 class="section-title">Vores vision er at blive<br>det førende rengøringsfirma</h2>
+      <p style="font-size:1rem; color:var(--gray); line-height:1.8; margin-bottom:24px;">Vi arbejder kontinuerligt på at forbedre vores services og udvide vores kundekreds. Vores mål er at være det foretrukne valg i København og omegn — både for kunder og medarbejdere.</p>
+      <p style="font-size:1rem; color:var(--gray); line-height:1.8;">Vi har planer om at investere i ny teknologi for at gøre vores arbejde endnu mere effektivt og bæredygtigt — uden at gå på kompromis med den personlige service, der kendetegner os.</p>
+    </div>
+    <div style="display:grid; gap:16px;">
+      <div style="background:var(--green-pale); border-radius:14px; padding:24px 28px; border-left:4px solid var(--green);">
+        <h4 style="font-size:1rem; font-weight:700; color:var(--green); margin-bottom:6px;">🏆 For vores kunder</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">At være det mest pålidelige og nærværende rengøringsfirma i Storkøbenhavn — med fokus på kvalitet, fleksibilitet og langvarige samarbejder.</p>
+      </div>
+      <div style="background:var(--blue-light); border-radius:14px; padding:24px 28px; border-left:4px solid var(--blue-mid);">
+        <h4 style="font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:6px;">👷 For vores medarbejdere</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">At skabe en arbejdsplads, der tiltrækker og fastholder de bedste folk i branchen — med gode vilkår, stolthed i arbejdet og fælles vækst.</p>
+      </div>
+      <div style="background:#fef4e4; border-radius:14px; padding:24px 28px; border-left:4px solid #c8922a;">
+        <h4 style="font-size:1rem; font-weight:700; color:#c8922a; margin-bottom:6px;">🌿 For miljøet</h4>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.65;">Investering i ny teknologi og metoder der gør rengøring endnu mere bæredygtig og skånsom over for mennesker og natur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SEKTION -->
+<section style="padding:96px 5%; background:var(--off-white);">
+  <div class="fade-up" style="max-width:900px; margin:0 auto; text-align:center;">
+    <span class="section-label">Er I klar?</span>
+    <h2 class="section-title">Et rent miljø skaber en<br>produktiv og sund atmosfære</h2>
+    <p style="font-size:1.05rem; color:var(--gray); line-height:1.8; max-width:680px; margin:0 auto 48px;">Vi hos ECO CLEAN DK ApS tror på, at rene omgivelser gør en reel forskel — for trivsel, produktivitet og det samlede indtryk. Er din virksomhed eller ejendom klar til at opleve enestående rengøringsservice?</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:48px; text-align:left;">
+
+      <div style="background:white; border-radius:16px; padding:32px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:1.5rem; margin-bottom:14px;">💼</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--blue); margin-bottom:14px;">Vores tilbud inkluderer</h4>
+        <div style="display:grid; gap:10px;">
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--green); font-weight:700;">✓</span> Omhyggelig og effektiv rengøring
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--green); font-weight:700;">✓</span> Skræddersyede løsninger efter jeres behov
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--green); font-weight:700;">✓</span> Professionelt og erfarent personale
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--green); font-weight:700;">✓</span> Daglig, ugentlig eller månedlig — du vælger
+          </div>
+        </div>
+      </div>
+
+      <div style="background:white; border-radius:16px; padding:32px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 16px rgba(0,0,0,0.04);">
+        <div style="font-size:1.5rem; margin-bottom:14px;">🤝</div>
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--blue); margin-bottom:14px;">Hvorfor vælge ECO CLEAN DK ApS?</h4>
+        <div style="display:grid; gap:10px;">
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--blue-mid); font-weight:700;">✓</span> Dedikerede til kvalitet og pålidelighed
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--blue-mid); font-weight:700;">✓</span> Personlig service og skræddersyede løsninger
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--blue-mid); font-weight:700;">✓</span> Høje standarder for hygiejne og renlighed
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; font-size:0.88rem; color:var(--gray);">
+            <span style="color:var(--blue-mid); font-weight:700;">✓</span> Vi lever af glade og tilfredse kunder
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--green),var(--blue)); border-radius:16px; padding:36px 40px; color:white;">
+      <p style="font-size:1.1rem; font-weight:600; line-height:1.7; margin-bottom:24px;">Lad os sammen hæve standarden for renlighed og skabe et mere indbydende miljø.<br>Kontakt os i dag for en uforpligtende samtale!</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="#contact" style="background:white; color:var(--blue); padding:14px 28px; border-radius:8px; text-decoration:none; font-weight:700; font-size:0.95rem;">Kontakt os i dag</a>
+        <a href="tel:50114714" style="background:rgba(255,255,255,0.15); color:white; border:2px solid rgba(255,255,255,0.4); padding:14px 28px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.95rem;">📞 50 114 714</a>
+      </div>
+    </div>
+
+    <!-- Skjulte SEO søgeord -->
+    <p style="font-size:0; color:transparent; height:0; overflow:hidden;" aria-hidden="true">rengøringsservice professionel rengøring ren arbejdsplads kundetilfredshed kvalitetsrengøring personlig service detaljeorienteret erhvervsrengøring københavn</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="fade-up">
+    <span class="section-label">Kontakt os</span>
+    <h2 class="section-title">Lad os tage en snak</h2>
+    <p class="section-sub">Kontakt os for et uforpligtende tilbud. Vi svarer hurtigt og glæder os til at høre om jeres behov.</p>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <strong>Email</strong>
+          <span><a href="mailto:info@Eco-Clean.nu" style="color:var(--green); text-decoration:none; font-weight:600">info@Eco-Clean.nu</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <strong>Telefon</strong>
+          <span><a href="tel:50114714">50 114 714</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <strong>Hjemmeside</strong>
+          <span><a href="https://eco-clean.nu" target="_blank">eco-clean.nu</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📋</div>
+        <div>
+          <strong>CVR-nummer</strong>
+          <span>45626865</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏢</div>
+        <div>
+          <strong>Selskab</strong>
+          <span>En del af Frank og Wolmer ApS</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <strong>Område</strong>
+          <span>København og omegn</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <strong>Tilgængelighed</strong>
+          <span>Fleksibel – vi tilpasser os jeres behov</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Skriv til os</h3>
+      <div class="form-group">
+        <label>Navn *</label>
+        <input type="text" placeholder="Dit fulde navn">
+      </div>
+      <div class="form-group">
+        <label>Virksomhed</label>
+        <input type="text" placeholder="Firmanavn">
+      </div>
+      <div class="form-group">
+        <label>Telefon *</label>
+        <input type="tel" placeholder="Dit telefonnummer">
+      </div>
+      <div class="form-group">
+        <label>Ydelse</label>
+        <select>
+          <option value="">Vælg ydelse...</option>
+          <option>Kontorrengøring</option>
+          <option>Restaurant & Café</option>
+          <option>Klinik</option>
+          <option>Fitnesscenter / Danselokale</option>
+          <option>Showroom</option>
+          <option>Trappevask & Vinduespudsning</option>
+          <option>Ind- & Udflytningsrengøring</option>
+          <option>Rengøring efter håndværkere</option>
+          <option>Busrengøring</option>
+          <option>Social rengøring</option>
+          <option>Dødsborengøring</option>
+          <option>Andet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Besked</label>
+        <textarea placeholder="Fortæl os om jeres behov..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Tak for din henvendelse! Vi kontakter dig snarest. Ring evt. direkte på 50 114 714.')">Send besked</button>
+    </div>
+  </div>
+</section>
+
+<!-- SEO BYNAVNE -->
+<section style="background:#f0f4f0; padding:48px 5%; border-top:1px solid rgba(0,0,0,0.06);">
+  <div style="max-width:1100px; margin:0 auto; text-align:center;">
+    <p style="font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#4a9a3f; margin-bottom:16px;">Erhvervsrengøring i København og omegn</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:1.3rem; color:#1a3a6b; margin-bottom:20px; font-weight:700;">Vi betjener hele Storkøbenhavn</h2>
+    <p style="font-size:0.82rem; color:#6b7280; line-height:2.2; max-width:980px; margin:0 auto;">
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Amager</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Albertslund</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Allerød</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Ballerup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Birkerød</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Brøndby</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Brønshøj</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Charlottenlund</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Dragør</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Egedal</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Farum</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Frederiksberg</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Frederikssund</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Furesø</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Ganløse</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Gentofte</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Gladsaxe</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Glostrup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Greve</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Hellerup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Helsingør</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Herlev</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Hillerød</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Holte</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Horsholm</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Hvidovre</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Høje-Taastrup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Hørsholm</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Ishøj</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Kastrup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Kgs. Lyngby</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København City</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København NV</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København N</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København S</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København SV</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København V</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">København Ø</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Kokkedal</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Kongens Enghave</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Køge</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Lyngby</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Lynge</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Måløv</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Nordhavn</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Nørrebro</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Nørreport</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Rødovre</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Roskilde</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Rudersdal</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Running</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Sengeløse</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Smørum</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Solrød Strand</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Søborg</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Søllerød</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Sønderborg</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Tårnby</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Taastrup</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Valby</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Vallensbæk</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Vanløse</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Vedbæk</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Vesterbro</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Virum</a> ·
+      <a href="#contact" style="color:#5a6475; text-decoration:none; margin:0 6px; white-space:nowrap;">Østerbro</a>
+    </p>
+    <p style="font-size:0.76rem; color:#9ca3af; margin-top:20px;">ECO CLEAN DK ApS udfører erhvervsrengøring, kontorrengøring, restaurantrengøring og flytterengøring i hele Storkøbenhavn og omegn.</p>
+  </div>
+</section>
+
+<!-- SEO BYNAVNE -->
+<section style="background:#f0f4f0; padding:48px 5%; border-top:1px solid rgba(0,0,0,0.06);">
+  <div style="max-width:1100px; margin:0 auto; text-align:center;">
+    <p style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Erhvervsrengøring i København og omegn</p>
+    <p style="font-size:0.8rem; color:var(--gray); margin-bottom:20px; line-height:1.6;">ECO CLEAN DK ApS betjener virksomheder i hele Storkøbenhavn og omegnskommunerne</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+      <!-- København -->
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København K</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København N</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København NV</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København S</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København SV</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København V</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">København Ø</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Frederiksberg</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Nørrebro</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Østerbro</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Vesterbro</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Amager</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Valby</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Vanløse</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Brønshøj</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Bispebjerg</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Islands Brygge</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Sydhavn</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Kongens Enghave</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Christianshavn</span>
+      <!-- Nordsjælland -->
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Gentofte</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Hellerup</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Charlottenlund</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Lyngby</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Kgs. Lyngby</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Virum</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Holte</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Nærum</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Vedbæk</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Skodsborg</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Klampeborg</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Hørsholm</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Birkerød</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Allerød</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Farum</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Værløse</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Bagsværd</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Søborg</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Gladsaxe</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Mølholm</span>
+      <!-- Vestegnen -->
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Herlev</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Ballerup</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Måløv</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Skovlunde</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Albertslund</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Glostrup</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Brøndby</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Brøndbyøster</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Hvidovre</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rødovre</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Islev</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Ishøj</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Vallensbæk</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Taastrup</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Høje Taastrup</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Hedehusene</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Greve</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Køge</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Solrød Strand</span>
+      <!-- Amager & Øresund -->
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Kastrup</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Tårnby</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Dragør</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Store Magleby</span>
+      <!-- Nordvest -->
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Smørum</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Stenløse</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Ølstykke</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Frederikssund</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Roskilde</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.15); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Tåstrup</span>
+    </div>
+    <p style="font-size:0.75rem; color:#aaa; margin-top:20px;">Vi udfører erhvervsrengøring, kontorrengøring, restaurantrengøring og flytterengøring i alle ovenstående områder.</p>
+  </div>
+</section>
+
+<!-- SEO SØGEORD SEKTION -->
+<section style="background:#f7f9f4; padding:56px 5%; border-top:1px solid rgba(0,0,0,0.06);">
+  <div style="max-width:1100px; margin:0 auto;">
+    <p style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:var(--blue); margin-bottom:6px; text-align:center;">Professionel rengøring til alle typer virksomheder</p>
+    <p style="font-size:0.8rem; color:var(--gray); margin-bottom:28px; line-height:1.6; text-align:center;">ECO CLEAN DK ApS tilbyder et bredt udvalg af rengøringsydelser i København og omegn</p>
+
+    <!-- Ydelser -->
+    <p style="font-size:0.72rem; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Ydelser</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Erhvervsrengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Kontorrengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Trappevask</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Vinduespolering</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Flytterengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Slutrengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Grundrengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Byggerengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøring efter håndværkere</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Perioderengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Afleveringsrengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringsservice</span>
+    </div>
+
+    <!-- Kundetyper -->
+    <p style="font-size:0.72rem; font-weight:700; color:var(--blue-mid); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Kundetyper</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Kontorhotel</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Klinikrengøring</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Restaurantrengøring</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Fitnesscenterrengøring</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Showroomrengøring</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Bureaurengøring</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Boligforening</span>
+      <span style="background:white; border:1px solid rgba(26,58,107,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Boligselskab</span>
+    </div>
+
+    <!-- Miljø -->
+    <p style="font-size:0.72rem; font-weight:700; color:#2d9e2d; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Miljø & bæredygtighed</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Miljøvenlig rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Bæredygtig rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Grøn rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Svanemærket rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">EU Blomst rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Certificeret rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Klimavenlig rengøring</span>
+      <span style="background:white; border:1px solid rgba(45,106,45,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Økologisk rengøring</span>
+    </div>
+
+    <!-- Kvalitet & aftaler -->
+    <p style="font-size:0.72rem; font-weight:700; color:#c8922a; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;">Kvalitet & aftaler</p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringsaftale</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringskontrakt</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringstilbud</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringsplan</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringskvalitet</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringsstandard</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringscheckliste</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Rengøringsteam</span>
+      <span style="background:white; border:1px solid rgba(200,146,42,0.2); color:var(--gray); padding:5px 13px; border-radius:20px; font-size:0.78rem;">Professionelt rengøringspersonale</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="margin-bottom:12px;">
+        <img src="data:image/png;base64,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" alt="ECO CLEAN DK ApS" style="height:62px; width:auto; background:white; padding:8px 16px; border-radius:8px;">
+      </div>
+      </div>
+      <p>Miljø, kvalitet og langvarige samarbejd.<br>Erhvervsrengøring i København og omegn med over 20 års erfaring. En del af Frank og Wolmer ApS.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ydelser</h5>
+      <ul>
+        <li><a href="#services">Kontorrengøring</a></li>
+        <li><a href="#services">Restaurant & Café</a></li>
+        <li><a href="#services">Klinikker</a></li>
+        <li><a href="#services">Fitnesscentre</a></li>
+        <li><a href="#services">Trappevask</a></li>
+        <li><a href="#services">Ind- & Udflytningsrengøring</a></li>
+        <li><a href="#services">Busrengøring</a></li>
+        <li><a href="#services">Social rengøring</a></li>
+        <li><a href="#services">Dødsborengøring</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Information</h5>
+      <ul>
+        <li><a href="#why">Om os</a></li>
+        <li><a href="#eco">Miljøpolitik</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="tel:50114714">50 114 714</a></li>
+        <li><a href="https://eco-clean.nu">eco-clean.nu</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 ECO CLEAN DK ApS · CVR: 45626865 · En del af Frank og Wolmer ApS</span>
+    <span>Erhvervsrengøring i København og omegn</span>
+  </div>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  // Close menu on outside click
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
