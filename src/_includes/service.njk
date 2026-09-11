@@ -1,0 +1,65 @@
+---
+layout: base.njk
+---
+{%- set service = services | findBySlug(page.fileSlug) %}
+<main class="page service-page">
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Brødkrumme">
+        <ol>
+          <li><a href="/">Forside</a></li>
+          <li><a href="/#services">Ydelser</a></li>
+          <li aria-current="page">{{ service.name }}</li>
+        </ol>
+      </nav>
+      <span class="section-label">{{ service.icon }} Erhvervsrengøring – København og omegn</span>
+      <h1>{{ service.h1 }}</h1>
+      <p class="lead">{{ lead }}</p>
+      <div class="hero-buttons">
+        <a href="/#contact" class="btn-primary">Få et tilbud</a>
+        <a href="tel:{{ site.phoneTel }}" class="btn-secondary">Ring {{ site.phoneDisplay }}</a>
+      </div>
+    </div>
+  </header>
+
+  <article class="page-body">
+    {{ content | safe }}
+  </article>
+
+  <section class="page-cta">
+    <h2>Skal vi tage en snak om {{ service.name | lower }}?</h2>
+    <p>Ring til os på <a href="tel:{{ site.phoneTel }}">{{ site.phoneDisplay }}</a>, skriv til <a href="mailto:{{ site.email }}">{{ site.email }}</a> eller brug <a href="/#contact">kontaktformularen</a>. Vi svarer hurtigt, og et tilbud er altid uforpligtende.</p>
+  </section>
+
+  <section class="related">
+    <h2>Andre ydelser</h2>
+    <ul>
+      {%- for slug in service.related %}
+      {%- set r = services | findBySlug(slug) %}
+      <li><a href="/ydelser/{{ r.slug }}/">{{ r.icon }} {{ r.name }}</a></li>
+      {%- endfor %}
+    </ul>
+  </section>
+</main>
+
+{%- set serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.h1,
+  "serviceType": service.name,
+  "description": description,
+  "url": site.url + page.url,
+  "provider": { "@type": "LocalBusiness", "@id": site.url + "/#business", "name": site.legalName },
+  "areaServed": site.areaServedLabel
+} %}
+{%- set breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Forside", "item": site.url + "/" },
+    { "@type": "ListItem", "position": 2, "name": "Ydelser", "item": site.url + "/#services" },
+    { "@type": "ListItem", "position": 3, "name": service.name }
+  ]
+} %}
+<script type="application/ld+json">{{ serviceLd | dump | safe }}</script>
+<script type="application/ld+json">{{ breadcrumbLd | dump | safe }}</script>

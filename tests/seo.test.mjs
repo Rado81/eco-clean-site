@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd, typesOf } from "./helpers.mjs";
+import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd, typesOf, words } from "./helpers.mjs";
 
 test("robots.txt is copied to the site root and points at the sitemap", () => {
   const file = join(OUT, "robots.txt");
@@ -179,3 +179,35 @@ test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
   assert.ok(root.querySelectorAll('img[src="/assets/logo.png"]').length >= 2, "logo in nav and footer");
   assert.equal(root.querySelectorAll('img[src^="/assets/partners/"]').length, 3, "three partner logos");
 });
+
+for (const s of services.filter((x) => x.hasPage)) {
+  const file = `_site/ydelser/${s.slug}/index.html`;
+  test(`/ydelser/${s.slug}/: service page content and structured data`, () => {
+    assert.ok(existsSync(file), `${file} not built`);
+    const root = load(file);
+    assert.equal(root.querySelector("h1").text.trim(), s.h1);
+    assert.ok(root.querySelector(".page-hero .lead")?.text.trim().length > 40, "lead paragraph");
+
+    const main = root.querySelector("main");
+    assert.ok(main, "main element");
+    const count = words(main.text);
+    assert.ok(count >= 300, `service page has only ${count} words, need 300+`);
+    assert.ok(main.querySelectorAll(".page-body h2").length >= 3, "at least three h2 sections in the body");
+
+    const crumbs = root.querySelectorAll(".breadcrumb li").map((li) => li.text.trim());
+    assert.deepEqual(crumbs, ["Forside", "Ydelser", s.name]);
+
+    const related = root.querySelectorAll(".related a").map((a) => a.getAttribute("href"));
+    assert.deepEqual(related, s.related.map((slug) => `/ydelser/${slug}/`));
+    assert.ok(root.querySelector('a[href="/"]'), "link back to the home page");
+
+    const lds = jsonLd(root);
+    const service = lds.find((ld) => typesOf(ld).includes("Service"));
+    assert.ok(service, "Service JSON-LD");
+    assert.equal(service.url, `${SITE_URL}/ydelser/${s.slug}/`);
+    assert.equal(service.provider["@id"], `${SITE_URL}/#business`);
+    const crumbLd = lds.find((ld) => typesOf(ld).includes("BreadcrumbList"));
+    assert.equal(crumbLd?.itemListElement?.length, 3);
+    assert.equal(crumbLd.itemListElement[2].name, s.name);
+  });
+}
