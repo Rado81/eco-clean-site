@@ -720,3 +720,13 @@ section,
 .hero p { margin-left: auto; margin-right: auto; }
 .hero-buttons { justify-content: center; }
 .hero-stats { justify-content: center; }
+
+/* ===== CENTERED SECTION HEADERS =====
+   Label, title and intro of every section are centered. Sections whose
+   header sits in a grid column opt out with .keep-left. */
+.section-label { display: table; margin-left: auto; margin-right: auto; }
+.section-title { text-align: center; }
+.section-sub { text-align: center; margin-left: auto; margin-right: auto; }
+.keep-left .section-label { display: inline-block; margin-left: 0; }
+.keep-left .section-title { text-align: left; }
+.keep-left .section-sub { text-align: left; margin-left: 0; }
