@@ -211,3 +211,17 @@ for (const s of services.filter((x) => x.hasPage)) {
     assert.equal(crumbLd.itemListElement[2].name, s.name);
   });
 }
+
+test("/om-os/: about page with Organization JSON-LD", () => {
+  const file = "_site/om-os/index.html";
+  assert.ok(existsSync(file), "about page not built");
+  const root = load(file);
+  assert.equal(root.querySelector("h1").text.trim(), "Om ECO CLEAN DK ApS");
+  const count = words(root.querySelector("main").text);
+  assert.ok(count >= 300, `about page has only ${count} words`);
+  const org = jsonLd(root).find((ld) => typesOf(ld).includes("Organization") && ld.name === "ECO CLEAN DK ApS");
+  assert.ok(org, "Organization JSON-LD missing");
+  assert.equal(org.parentOrganization?.name, "Frank og Wolmer ApS");
+  const crumbs = root.querySelectorAll(".breadcrumb li").map((li) => li.text.trim());
+  assert.deepEqual(crumbs, ["Forside", "Om os"]);
+});

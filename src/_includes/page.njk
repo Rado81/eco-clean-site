@@ -1,0 +1,46 @@
+---
+layout: base.njk
+---
+<main class="page">
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <nav class="breadcrumb" aria-label="Brødkrumme">
+        <ol>
+          <li><a href="/">Forside</a></li>
+          <li aria-current="page">{{ crumb or h1 }}</li>
+        </ol>
+      </nav>
+      <h1>{{ h1 }}</h1>
+      <p class="lead">{{ lead }}</p>
+      <div class="hero-buttons">
+        <a href="/#contact" class="btn-primary">Få et tilbud</a>
+        <a href="tel:{{ site.phoneTel }}" class="btn-secondary">Ring {{ site.phoneDisplay }}</a>
+      </div>
+    </div>
+  </header>
+
+  <article class="page-body">
+    {{ content | safe }}
+  </article>
+
+  <section class="page-cta">
+    <h2>Skal vi tage en snak?</h2>
+    <p>Ring til os på <a href="tel:{{ site.phoneTel }}">{{ site.phoneDisplay }}</a>, skriv til <a href="mailto:{{ site.email }}">{{ site.email }}</a> eller brug <a href="/#contact">kontaktformularen</a>. Vi svarer hurtigt, og et tilbud er altid uforpligtende.</p>
+  </section>
+</main>
+
+{%- if jsonld == "organization" %}
+{%- set orgLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": site.url + "/#organization",
+  "name": site.legalName,
+  "url": site.url + "/",
+  "logo": site.url + "/assets/logo.png",
+  "telephone": site.phoneIntl,
+  "email": site.email,
+  "vatID": site.vatId,
+  "parentOrganization": { "@type": "Organization", "name": site.parentCompany }
+} %}
+<script type="application/ld+json">{{ orgLd | dump | safe }}</script>
+{%- endif %}
