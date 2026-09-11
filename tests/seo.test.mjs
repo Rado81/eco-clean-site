@@ -34,3 +34,19 @@ test("logo and icon assets are built with the expected dimensions", () => {
   assert.equal(manifest.name, "ECO CLEAN DK ApS");
   assert.equal(manifest.icons.length, 2);
 });
+
+test("styles.css is built once, deduplicated, and contains all original blocks", () => {
+  const file = "_site/css/styles.css";
+  assert.ok(existsSync(file), `${file} missing`);
+  const css = readFileSync(file, "utf8");
+  for (const needle of [".hero {", ".tp-wrapper {", ".kunde-wrapper {", ".hamburger {", ".page-hero {", ".breadcrumb ol {", ".footer-heading {"]) {
+    assert.ok(css.includes(needle), `missing rule ${needle}`);
+  }
+  const mobileBlocks = css.split("MOBILE OPTIMERING").length - 1;
+  assert.equal(mobileBlocks, 1, `mobile block should appear once, found ${mobileBlocks}`);
+  assert.equal(css.split(".tp-wrapper {").length - 1, 1, ".tp-wrapper defined more than once");
+  assert.ok(!css.includes("<style>") && !css.includes("</style>"), "style tags leaked into css");
+  assert.ok(!css.includes(".offer-step h4"), "selector .offer-step h4 should have been renamed to h3");
+  assert.ok(!css.includes(".eco-card h4"), "selector .eco-card h4 should have been renamed to h3");
+  assert.ok(!css.includes(".footer-col h5"), "selector .footer-col h5 should have been replaced by .footer-heading");
+});
