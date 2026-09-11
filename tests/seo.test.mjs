@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { OUT, SITE_URL } from "./helpers.mjs";
+import { OUT, SITE_URL, pngSize } from "./helpers.mjs";
 
 test("robots.txt is copied to the site root and points at the sitemap", () => {
   const file = join(OUT, "robots.txt");
@@ -11,4 +11,26 @@ test("robots.txt is copied to the site root and points at the sitemap", () => {
   assert.match(txt, /^User-agent: \*$/m);
   assert.match(txt, /^Allow: \/$/m);
   assert.match(txt, new RegExp(`^Sitemap: ${SITE_URL}/sitemap.xml$`, "m"));
+});
+
+test("logo and icon assets are built with the expected dimensions", () => {
+  const expect = {
+    "_site/assets/logo.png": [121, 62],
+    "_site/assets/og-image.png": [1200, 630],
+    "_site/assets/favicon-32.png": [32, 32],
+    "_site/assets/apple-touch-icon.png": [180, 180],
+    "_site/assets/icon-192.png": [192, 192],
+    "_site/assets/icon-512.png": [512, 512],
+    "_site/assets/partners/team-trees.png": [144, 144],
+    "_site/assets/partners/team-seas.png": [144, 144],
+    "_site/assets/partners/novak-djokovic-foundation.png": [144, 144],
+  };
+  for (const [file, [w, h]] of Object.entries(expect)) {
+    assert.ok(existsSync(file), `${file} missing`);
+    assert.deepEqual(pngSize(file), { width: w, height: h }, `${file} has wrong size`);
+  }
+  assert.ok(existsSync("_site/favicon.ico"), "_site/favicon.ico missing");
+  const manifest = JSON.parse(readFileSync("_site/assets/site.webmanifest", "utf8"));
+  assert.equal(manifest.name, "ECO CLEAN DK ApS");
+  assert.equal(manifest.icons.length, 2);
 });
