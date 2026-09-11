@@ -24,7 +24,9 @@
   }
 
   /* NAV */
-  nav {
+  /* :not(.breadcrumb) keeps the fixed site header off the in-page
+     breadcrumb, which is also a <nav> landmark. */
+  nav:not(.breadcrumb) {
     position: fixed; top: 0; width: 100%; z-index: 100;
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(12px);
@@ -450,7 +452,7 @@
 
   @media (max-width: 768px) {
     /* Nav */
-    nav { height: 60px; padding: 0 4%; }
+    nav:not(.breadcrumb) { height: 60px; padding: 0 4%; }
     .nav-links { display: none !important; }
     .nav-cta { display: none; }
     .hamburger { display: flex; }
@@ -525,7 +527,7 @@
 
   @media (max-width: 400px) {
     .hero h1 { font-size: 1.9rem; }
-    nav { height: 56px; }
+    nav:not(.breadcrumb) { height: 56px; }
     .mobile-menu { top: 56px; }
   }
 
