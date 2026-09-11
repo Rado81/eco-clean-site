@@ -693,3 +693,30 @@
   .page-hero { padding: 48px 4% 40px; }
   .page-body { padding: 40px 4%; }
 }
+
+/* ===== CONTENT WIDTH CAP (wide screens) =====
+   Backgrounds stay full-width; content inside nav, sections and footer is
+   capped at --content-max and centered by growing the side padding once the
+   viewport is wider than that. Below it the original 5% / 4% gutters apply.
+   !important is needed because several sections carry inline padding. */
+:root { --content-max: 1200px; }
+nav:not(.breadcrumb),
+footer,
+section,
+.eco-strip {
+  padding-left: max(5%, calc((100% - var(--content-max)) / 2)) !important;
+  padding-right: max(5%, calc((100% - var(--content-max)) / 2)) !important;
+}
+@media (max-width: 768px) {
+  nav:not(.breadcrumb), footer, section, .eco-strip {
+    padding-left: 4% !important;
+    padding-right: 4% !important;
+  }
+}
+
+/* ===== CENTERED HERO ===== */
+.hero { justify-content: center; text-align: center; }
+.hero-content { max-width: 760px; }
+.hero p { margin-left: auto; margin-right: auto; }
+.hero-buttons { justify-content: center; }
+.hero-stats { justify-content: center; }
