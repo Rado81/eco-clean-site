@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd } from "./helpers.mjs";
+import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd, typesOf } from "./helpers.mjs";
 
 test("robots.txt is copied to the site root and points at the sitemap", () => {
   const file = join(OUT, "robots.txt");
@@ -119,3 +119,63 @@ for (const file of htmlPages()) {
     for (const ld of jsonLd(root)) assert.ok(ld["@context"] === "https://schema.org", "JSON-LD @context");
   });
 }
+
+const services = JSON.parse(readFileSync("src/_data/services.json", "utf8"));
+
+test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
+  const file = "_site/index.html";
+  assert.ok(existsSync(file), "home page not built");
+  const root = load(file);
+  const html = readFileSync(file, "utf8");
+
+  const business = jsonLd(root).find((ld) => typesOf(ld).includes("LocalBusiness"));
+  assert.ok(business, "LocalBusiness JSON-LD missing");
+  assert.ok(typesOf(business).includes("CleaningService"));
+  assert.equal(business.telephone, "+4550114714");
+  assert.equal(business.vatID, "DK45626865");
+  assert.ok(!jsonLd(root).some((ld) => typesOf(ld).some((t) => /Rating|Review/.test(t))), "no rating markup allowed");
+
+  assert.equal(root.querySelectorAll(".service-card").length, 11);
+  const cardLinks = root.querySelectorAll(".service-card a.card-link").map((a) => a.getAttribute("href"));
+  const expected = services.filter((s) => s.hasPage).map((s) => `/ydelser/${s.slug}/`);
+  assert.deepEqual(cardLinks, expected);
+
+  for (const id of ["services", "om-os", "why", "eco", "contact", "omraader"]) {
+    assert.ok(root.querySelector(`#${id}`), `section #${id} missing`);
+  }
+
+  // Reviews strip untouched
+  for (const quote of [
+    "Altid punktlige og grundige. Vores kontor skinner efter hver rengøring!",
+    "Brugt dem i 2 år. Miljøvenlige midler og super service hver gang.",
+    "Utroligt dygtige — tager vores kliniks hygiejnekrav meget seriøst.",
+    "Fleksible og pålidelige. De tilpasser sig altid vores skiftende behov.",
+    "Vores fitnesscenter er altid rent og friskt. Gæsterne bemærker det!",
+    "Professionel og venlig betjening. Vi anbefaler ECO CLEAN til alle!",
+  ]) assert.ok(html.includes(quote), `review missing: ${quote}`);
+  assert.ok(html.includes("4.8 ud af 5"));
+
+  // Areas list kept, keyword blocks and link-list gone
+  assert.ok(html.includes("Birkerød") && html.includes("Dragør"), "areas list missing");
+  const anchorTexts = root.querySelectorAll("a").map((a) => a.text.trim());
+  assert.ok(!anchorTexts.includes("Sønderborg") && !anchorTexts.includes("Running"), "old area link list still present");
+  assert.ok(!anchorTexts.includes("Rengøringskontrakt"), "keyword link block still present");
+  const contactAnchors = root.querySelectorAll('a[href="#contact"], a[href="/#contact"]').length;
+  assert.ok(contactAnchors <= 12, `too many #contact anchors (${contactAnchors}); keyword links still present?`);
+
+  // Contact form is a real form
+  const form = root.querySelector("form.contact-form");
+  assert.ok(form, "contact form missing");
+  assert.equal(form.getAttribute("method")?.toLowerCase(), "post");
+  assert.ok(form.getAttribute("action"), "form action missing");
+  for (const name of ["navn", "virksomhed", "telefon", "ydelse", "besked"]) {
+    assert.ok(form.querySelector(`[name="${name}"]`), `field ${name} missing`);
+  }
+  assert.ok(form.querySelector('button[type="submit"]'), "submit button");
+  assert.ok(!html.includes("alert("), "old alert() handler still present");
+  assert.ok(!html.includes("Eco-Clean.nu"), "email should be lower-case");
+
+  // Assets
+  assert.ok(root.querySelectorAll('img[src="/assets/logo.png"]').length >= 2, "logo in nav and footer");
+  assert.equal(root.querySelectorAll('img[src^="/assets/partners/"]').length, 3, "three partner logos");
+});
