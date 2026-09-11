@@ -1,4 +1,11 @@
+import { HtmlBasePlugin } from "@11ty/eleventy";
+
 export default function (eleventyConfig) {
+  // Rewrites root-relative URLs (/css/…, /assets/…, /ydelser/…) with the path
+  // prefix when one is given, e.g. `eleventy --pathprefix=/eco-clean-site/` for
+  // the GitHub Pages preview. Without a prefix the output is unchanged.
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+
   // Static files copied 1:1 into _site/ (paths are relative to the project root).
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/assets");

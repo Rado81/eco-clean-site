@@ -19,6 +19,13 @@ Upload the **contents** of `_site/` to the web root of the host, replacing what 
 All pages are folders with an `index.html`, so no server configuration is required.
 `404.html` at the root is picked up by most static hosts automatically.
 
+## Preview on GitHub Pages
+
+Every push to the `seo-multipage` branch runs `.github/workflows/pages.yml`, which runs
+`npm test`, builds with `--pathprefix=/eco-clean-site/` and `SITE_PREVIEW=1`, and publishes
+to <https://rado81.github.io/eco-clean-site/>. The preview build adds `noindex` to every page
+so search engines ignore the copy; canonical URLs still point at eco-clean.nu.
+
 ## Structure
 
 - `src/index.njk` – home page

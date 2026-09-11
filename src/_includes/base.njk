@@ -6,7 +6,7 @@
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
-{%- if noindex %}
+{%- if noindex or env.preview %}
 <meta name="robots" content="noindex">
 {%- endif %}
 {%- if site.googleSiteVerification %}
