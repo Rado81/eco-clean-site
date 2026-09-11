@@ -225,3 +225,22 @@ test("/om-os/: about page with Organization JSON-LD", () => {
   const crumbs = root.querySelectorAll(".breadcrumb li").map((li) => li.text.trim());
   assert.deepEqual(crumbs, ["Forside", "Om os"]);
 });
+
+test("sitemap.xml lists every indexable page once with an ISO lastmod", () => {
+  const file = "_site/sitemap.xml";
+  assert.ok(existsSync(file), "sitemap missing");
+  const xml = readFileSync(file, "utf8");
+  const locs = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
+  const expected = ["/", "/om-os/", ...services.filter((s) => s.hasPage).map((s) => `/ydelser/${s.slug}/`)].map((u) => SITE_URL + u);
+  assert.deepEqual([...locs].sort(), [...expected].sort());
+  assert.ok(!xml.includes("404"), "404 page must not be in the sitemap");
+  const mods = [...xml.matchAll(/<lastmod>(.*?)<\/lastmod>/g)].map((m) => m[1]);
+  assert.equal(mods.length, locs.length);
+  for (const m of mods) assert.match(m, /^\d{4}-\d{2}-\d{2}$/);
+  // every built page except 404 is in the sitemap
+  for (const page of htmlPages()) {
+    const url = urlOf(page);
+    if (url === "/404.html") continue;
+    assert.ok(locs.includes(SITE_URL + url), `${url} missing from sitemap`);
+  }
+});

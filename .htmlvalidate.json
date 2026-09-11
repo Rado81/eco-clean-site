@@ -1,0 +1,15 @@
+{
+  "extends": ["html-validate:standard"],
+  "rules": {
+    "heading-level": "error",
+    "no-dup-id": "error",
+    "no-missing-references": "error",
+    "element-required-attributes": "error",
+    "wcag/h37": "error",
+    "wcag/h32": "error",
+    "long-title": ["error", { "maxlength": 60 }],
+    "meta-refresh": "error",
+    "no-inline-style": "off",
+    "require-sri": "off"
+  }
+}
