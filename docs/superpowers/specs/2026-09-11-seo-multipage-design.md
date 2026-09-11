@@ -13,7 +13,7 @@ and without the spam-like keyword block that exists today.
 
 Success criteria:
 
-- Ten crawlable pages (home, about, eight service pages), each with a unique
+- Thirteen crawlable pages (home, about, eleven service pages), each with a unique
   title, meta description, canonical URL, one H1 and 300–500 words of Danish copy.
 - Lighthouse SEO score 100 on home and on one service page; performance and
   accessibility not below the current page.
@@ -31,7 +31,7 @@ endpoint, new photography, changes to the reviews section.
 | --- | --- |
 | Structure | Multi-page site; home page kept as the landing page |
 | Hosting | Static file host, files uploaded manually; no server rewrites available |
-| Pages | Home, Om os, eight service pages. No area pages. |
+| Pages | Home, Om os, eleven service pages (showroom, bus and social rengøring added 2026-09-11 after reviewing the built home page). No area pages. |
 | Reviews | The Trustpilot section stays exactly as it is; no rating markup |
 | Copy | Claude drafts the Danish text, Kristian/Rado review |
 | Tooling | Eleventy (11ty) static site generator, Node-based |
@@ -120,8 +120,7 @@ Rules:
 - Slugs are ASCII (ø to oe, å to aa, æ to ae). Every page is a folder with
   `index.html` so URLs work without server configuration and end in a
   trailing slash.
-- Showroom, busrengøring and social rengøring remain cards on the home page
-  with no page of their own and no link.
+- Showroom, busrengøring and social rengøring also have pages (/ydelser/showroom/, /ydelser/busrengoering/, /ydelser/social-rengoering/), added after the first review of the built site so every card links somewhere.
 - `services.json` entries: `slug`, `name` (card and footer label), `h1` (page
   heading), `icon` (emoji as today), `blurb` (card text), `hasPage` (boolean),
   `related` (list of slugs). It drives the home page cards, the footer

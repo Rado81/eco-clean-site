@@ -38,9 +38,11 @@
   {
     "slug": "showroom",
     "name": "Showroom",
+    "h1": "Showroomrengøring i København",
     "icon": "✨",
-    "hasPage": false,
-    "blurb": "Præsentabel og detaljefokuseret rengøring af showrooms og udstillingslokaler."
+    "hasPage": true,
+    "blurb": "Præsentabel og detaljefokuseret rengøring af showrooms og udstillingslokaler.",
+    "related": ["kontorrengoering", "trappevask-og-vinduespudsning", "rengoering-efter-haandvaerkere"]
   },
   {
     "slug": "trappevask-og-vinduespudsning",
@@ -72,16 +74,20 @@
   {
     "slug": "busrengoering",
     "name": "Busrengøring",
+    "h1": "Busrengøring i København",
     "icon": "🚌",
-    "hasPage": false,
-    "blurb": "Professionel ind- og udvendig rengøring af busser og større køretøjer."
+    "hasPage": true,
+    "blurb": "Professionel ind- og udvendig rengøring af busser og større køretøjer.",
+    "related": ["kontorrengoering", "rengoering-efter-haandvaerkere", "flytterengoering"]
   },
   {
     "slug": "social-rengoering",
     "name": "Social rengøring",
+    "h1": "Social rengøring i København",
     "icon": "🤝",
-    "hasPage": false,
-    "blurb": "Vi samarbejder med kommuner, boligforeninger og institutioner om social rengøring — en indsats der udføres med nærvær, respekt og diskretion."
+    "hasPage": true,
+    "blurb": "Vi samarbejder med kommuner, boligforeninger og institutioner om social rengøring — en indsats der udføres med nærvær, respekt og diskretion.",
+    "related": ["flytterengoering", "doedsborengoering", "trappevask-og-vinduespudsning"]
   },
   {
     "slug": "doedsborengoering",
