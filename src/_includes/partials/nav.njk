@@ -1,0 +1,24 @@
+<nav>
+  <a href="/" class="nav-logo" style="text-decoration:none; display:flex; align-items:center;">
+    <img src="/assets/logo.png" alt="ECO CLEAN DK ApS" width="121" height="62" style="height:52px; width:auto;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#services">Ydelser</a></li>
+    <li><a href="/om-os/">Om os</a></li>
+    <li><a href="/#why">Hvorfor os</a></li>
+    <li><a href="/#eco">Miljø</a></li>
+    <li><a href="/#contact">Kontakt</a></li>
+  </ul>
+  <a href="tel:{{ site.phoneTel }}" class="nav-cta">📞 {{ site.phoneDisplay }}</a>
+  <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#services" onclick="closeMenu()">Ydelser</a>
+  <a href="/om-os/" onclick="closeMenu()">Om os</a>
+  <a href="/#why" onclick="closeMenu()">Hvorfor os</a>
+  <a href="/#eco" onclick="closeMenu()">Miljø</a>
+  <a href="/#contact" onclick="closeMenu()">Kontakt</a>
+  <a href="tel:{{ site.phoneTel }}" style="color:var(--green); margin-top:8px;">📞 {{ site.phoneDisplay }}</a>
+</div>

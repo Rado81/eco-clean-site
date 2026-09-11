@@ -1,0 +1,31 @@
+{
+  "name": "ECO CLEAN DK",
+  "legalName": "ECO CLEAN DK ApS",
+  "url": "https://eco-clean.nu",
+  "phoneDisplay": "50 114 714",
+  "phoneTel": "50114714",
+  "phoneIntl": "+4550114714",
+  "email": "info@eco-clean.nu",
+  "cvr": "45626865",
+  "vatId": "DK45626865",
+  "parentCompany": "Frank og Wolmer ApS",
+  "priceRange": "Timepris fra 485 kr. ekskl. moms",
+  "address": {
+    "streetAddress": "",
+    "postalCode": "",
+    "addressLocality": "København",
+    "addressCountry": "DK"
+  },
+  "openingHours": {
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "16:00",
+    "note": "Assumed default until confirmed by the client"
+  },
+  "areaServed": ["København", "Frederiksberg", "Storkøbenhavn", "Nordsjælland", "Vestegnen", "Amager"],
+  "areaServedLabel": "København og omegn",
+  "trustpilotUrl": "",
+  "formEndpoint": "",
+  "googleSiteVerification": "",
+  "ogImage": "/assets/og-image.png"
+}

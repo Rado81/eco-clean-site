@@ -1,0 +1,33 @@
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="margin-bottom:12px;">
+        <img src="/assets/logo.png" alt="ECO CLEAN DK ApS" width="121" height="62" style="height:62px; width:auto; background:white; padding:8px 16px; border-radius:8px;">
+      </div>
+      <p>Miljø, kvalitet og langvarige samarbejd.<br>Erhvervsrengøring i København og omegn med over 20 års erfaring. En del af {{ site.parentCompany }}.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Ydelser</p>
+      <ul>
+        {%- for s in services %}
+        <li><a href="{% if s.hasPage %}/ydelser/{{ s.slug }}/{% else %}/#services{% endif %}">{{ s.name }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-heading">Information</p>
+      <ul>
+        <li><a href="/om-os/">Om os</a></li>
+        <li><a href="/#eco">Miljøpolitik</a></li>
+        <li><a href="/#omraader">Områder</a></li>
+        <li><a href="/#contact">Kontakt</a></li>
+        <li><a href="tel:{{ site.phoneTel }}">{{ site.phoneDisplay }}</a></li>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ build.year }} {{ site.legalName }} · CVR: {{ site.cvr }} · En del af {{ site.parentCompany }}</span>
+    <span>Erhvervsrengøring i København og omegn</span>
+  </div>
+</footer>

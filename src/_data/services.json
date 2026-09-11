@@ -1,0 +1,95 @@
+[
+  {
+    "slug": "kontorrengoering",
+    "name": "Kontorrengøring",
+    "h1": "Kontorrengøring i København",
+    "icon": "🏢",
+    "hasPage": true,
+    "blurb": "Grundig og diskret rengøring af kontorer, kontorhoteller og bureauer. Vi tilpasser os jeres behov og arbejdstider.",
+    "related": ["restaurant-og-cafe", "trappevask-og-vinduespudsning", "rengoering-efter-haandvaerkere"]
+  },
+  {
+    "slug": "restaurant-og-cafe",
+    "name": "Restaurant & Café",
+    "h1": "Restaurantrengøring i København",
+    "icon": "🍽️",
+    "hasPage": true,
+    "blurb": "Professionel rengøring af restauranter og caféer med fokus på hygiejne og fødevaresikkerhed.",
+    "related": ["kontorrengoering", "klinikrengoering", "trappevask-og-vinduespudsning"]
+  },
+  {
+    "slug": "klinikrengoering",
+    "name": "Klinikker",
+    "h1": "Klinikrengøring i København",
+    "icon": "🏥",
+    "hasPage": true,
+    "blurb": "Højt hygiejneniveau til klinikker og sundhedsfaciliteter, hvor renlighed er afgørende.",
+    "related": ["kontorrengoering", "fitnesscenter-rengoering", "trappevask-og-vinduespudsning"]
+  },
+  {
+    "slug": "fitnesscenter-rengoering",
+    "name": "Fitnesscentre & Danselokaler",
+    "h1": "Rengøring af fitnesscentre og danselokaler i København",
+    "icon": "💪",
+    "hasPage": true,
+    "blurb": "Effektiv rengøring af træningsfaciliteter og danselokaler med fokus på desinfektion og frisk luft.",
+    "related": ["klinikrengoering", "kontorrengoering", "trappevask-og-vinduespudsning"]
+  },
+  {
+    "slug": "showroom",
+    "name": "Showroom",
+    "icon": "✨",
+    "hasPage": false,
+    "blurb": "Præsentabel og detaljefokuseret rengøring af showrooms og udstillingslokaler."
+  },
+  {
+    "slug": "trappevask-og-vinduespudsning",
+    "name": "Trappevask & Vinduespudsning",
+    "h1": "Trappevask og vinduespudsning i København",
+    "icon": "🪟",
+    "hasPage": true,
+    "blurb": "Grundig rengøring af trapper og professionel vinduespudsning for det perfekte udtryk.",
+    "related": ["kontorrengoering", "flytterengoering", "rengoering-efter-haandvaerkere"]
+  },
+  {
+    "slug": "flytterengoering",
+    "name": "Ind- & Udflytningsrengøring",
+    "h1": "Flytterengøring i København",
+    "icon": "📦",
+    "hasPage": true,
+    "blurb": "Vi laver ind- og udflytningsrengøring for både private og erhverv. Grundig afleveringsrengøring og istandsættelse — så alt er klar til næste lejer eller køber.",
+    "related": ["rengoering-efter-haandvaerkere", "doedsborengoering", "trappevask-og-vinduespudsning"]
+  },
+  {
+    "slug": "rengoering-efter-haandvaerkere",
+    "name": "Rengøring efter håndværkere",
+    "h1": "Rengøring efter håndværkere i København",
+    "icon": "🔨",
+    "hasPage": true,
+    "blurb": "Grundig oprydning og rengøring efter bygge- og renoveringsarbejde. Støv og snavs er vores speciale.",
+    "related": ["flytterengoering", "kontorrengoering", "trappevask-og-vinduespudsning"]
+  },
+  {
+    "slug": "busrengoering",
+    "name": "Busrengøring",
+    "icon": "🚌",
+    "hasPage": false,
+    "blurb": "Professionel ind- og udvendig rengøring af busser og større køretøjer."
+  },
+  {
+    "slug": "social-rengoering",
+    "name": "Social rengøring",
+    "icon": "🤝",
+    "hasPage": false,
+    "blurb": "Vi samarbejder med kommuner, boligforeninger og institutioner om social rengøring — en indsats der udføres med nærvær, respekt og diskretion."
+  },
+  {
+    "slug": "doedsborengoering",
+    "name": "Dødsborengøring",
+    "h1": "Dødsborengøring i København",
+    "icon": "🕊️",
+    "hasPage": true,
+    "blurb": "En skånsom og respektfuld tømning og rengøring af bolig efter dødsfald. Vi håndterer opgaven med stor omhu og takt, så pårørende slipper for en svær byrde.",
+    "related": ["flytterengoering", "rengoering-efter-haandvaerkere", "kontorrengoering"]
+  }
+]

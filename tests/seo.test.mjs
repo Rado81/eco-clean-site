@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { OUT, SITE_URL, pngSize } from "./helpers.mjs";
+import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd } from "./helpers.mjs";
 
 test("robots.txt is copied to the site root and points at the sitemap", () => {
   const file = join(OUT, "robots.txt");
@@ -50,3 +50,72 @@ test("styles.css is built once, deduplicated, and contains all original blocks",
   assert.ok(!css.includes(".eco-card h4"), "selector .eco-card h4 should have been renamed to h3");
   assert.ok(!css.includes(".footer-col h5"), "selector .footer-col h5 should have been replaced by .footer-heading");
 });
+
+test("at least one HTML page is built", () => {
+  assert.ok(htmlPages().length >= 1, "no HTML pages in _site");
+});
+
+for (const file of htmlPages()) {
+  const url = urlOf(file);
+  test(`${url}: head has complete, consistent SEO metadata`, () => {
+    const root = load(file);
+    assert.equal(root.querySelector("html")?.getAttribute("lang"), "da");
+
+    const titles = root.querySelectorAll("title");
+    assert.equal(titles.length, 1, "exactly one <title>");
+    const title = titles[0].text.trim();
+    assert.ok(title.length > 0 && title.length <= 60, `title length ${title.length}: "${title}"`);
+
+    const descs = root.querySelectorAll('meta[name="description"]');
+    assert.equal(descs.length, 1, "exactly one meta description");
+    const desc = descs[0].getAttribute("content").trim();
+    assert.ok(desc.length >= 120 && desc.length <= 160, `description length ${desc.length}: "${desc}"`);
+
+    const canonical = root.querySelector('link[rel="canonical"]')?.getAttribute("href");
+    assert.equal(canonical, SITE_URL + url);
+
+    const meta = (p) => root.querySelector(`meta[property="${p}"]`)?.getAttribute("content");
+    assert.equal(meta("og:title"), title);
+    assert.equal(meta("og:description"), desc);
+    assert.equal(meta("og:url"), SITE_URL + url);
+    assert.equal(meta("og:image"), `${SITE_URL}/assets/og-image.png`);
+    assert.equal(meta("og:locale"), "da_DK");
+    assert.equal(meta("og:type"), "website");
+    assert.equal(root.querySelector('meta[name="twitter:card"]')?.getAttribute("content"), "summary_large_image");
+
+    assert.ok(root.querySelector('link[rel="stylesheet"][href="/css/styles.css"]'), "stylesheet link");
+    assert.ok(root.querySelector('link[rel="preconnect"][href="https://fonts.googleapis.com"]'), "preconnect googleapis");
+    assert.ok(root.querySelector('link[rel="preconnect"][href="https://fonts.gstatic.com"]'), "preconnect gstatic");
+    assert.ok(root.querySelector('link[rel="icon"]'), "favicon link");
+    assert.ok(root.querySelector('link[rel="apple-touch-icon"]'), "apple touch icon");
+    assert.ok(root.querySelector('link[rel="manifest"]'), "manifest link");
+
+    const robots = root.querySelector('meta[name="robots"]')?.getAttribute("content");
+    if (url === "/404.html") assert.equal(robots, "noindex");
+    else assert.equal(robots, undefined, "only the 404 page may be noindex");
+  });
+
+  test(`${url}: heading structure, images and hidden-text hygiene`, () => {
+    const root = load(file);
+    const h1s = root.querySelectorAll("h1");
+    assert.equal(h1s.length, 1, `expected one h1, found ${h1s.length}`);
+    const levels = root.querySelectorAll("h1,h2,h3,h4,h5,h6").map((h) => Number(h.tagName[1]));
+    assert.equal(levels[0], 1, "first heading must be the h1");
+    let prev = 1;
+    for (const lvl of levels) {
+      assert.ok(lvl <= prev + 1, `heading level jumps from h${prev} to h${lvl}`);
+      prev = lvl;
+    }
+    for (const img of root.querySelectorAll("img")) {
+      const src = img.getAttribute("src") ?? "";
+      assert.ok(img.hasAttribute("alt"), `img ${src} missing alt`);
+      assert.ok(img.getAttribute("width") && img.getAttribute("height"), `img ${src} missing width/height`);
+      assert.ok(!src.startsWith("data:"), `img ${src.slice(0, 30)} is still base64`);
+      assert.ok(!src.startsWith("/mnt/"), `img ${src} points at a non-existent upload path`);
+    }
+    const html = readFileSync(file, "utf8");
+    assert.ok(!/font-size:\s*0[;"]/.test(html), "hidden text via font-size:0 found");
+    assert.ok(!html.includes("ren arbejdsplads kundetilfredshed"), "hidden keyword paragraph found");
+    for (const ld of jsonLd(root)) assert.ok(ld["@context"] === "https://schema.org", "JSON-LD @context");
+  });
+}
