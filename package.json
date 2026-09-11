@@ -1,0 +1,24 @@
+{
+  "name": "eco-clean-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "eco-clean.nu – ECO CLEAN DK ApS website, built with Eleventy",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "images": "node scripts/make-images.mjs",
+    "test": "npm run build && node --test \"tests/**/*.test.mjs\"",
+    "check": "npm run build && html-validate \"_site/**/*.html\" && linkinator ./_site --recurse --skip \"^https://eco-clean\\.nu\" --verbosity error"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@resvg/resvg-js": "^2.6.2",
+    "html-validate": "^11.15.0",
+    "http-server": "^14.1.1",
+    "lighthouse": "^13.4.1",
+    "linkinator": "^8.1.0",
+    "node-html-parser": "^9.0.4",
+    "png-to-ico": "^3.0.2"
+  }
+}
