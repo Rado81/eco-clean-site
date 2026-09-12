@@ -17,7 +17,7 @@ Website for ECO CLEAN DK ApS, built as a static site with [Eleventy](https://www
 
 Upload the **contents** of `_site/` to the web root of the host, replacing what is there.
 All pages are folders with an `index.html`, so no server configuration is required.
-`404.html` at the root is picked up by most static hosts automatically.
+`src/.htaccess` (copied to the root) tells Apache on Simply.com to serve `404.html` for missing pages.
 
 ### Contact form
 

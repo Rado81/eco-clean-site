@@ -14,6 +14,12 @@ test("robots.txt is copied to the site root and points at the sitemap", () => {
   assert.match(txt, new RegExp(`^Sitemap: ${SITE_URL}/sitemap.xml$`, "m"));
 });
 
+test(".htaccess is copied to the site root and maps 404s to 404.html", () => {
+  const file = join(OUT, ".htaccess");
+  assert.ok(existsSync(file), "_site/.htaccess missing");
+  assert.match(readFileSync(file, "utf8"), /^ErrorDocument 404 \/404\.html$/m);
+});
+
 test("logo and icon assets are built with the expected dimensions", () => {
   const expect = {
     "_site/assets/logo.png": [121, 62],

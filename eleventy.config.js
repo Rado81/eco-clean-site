@@ -11,6 +11,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
+  eleventyConfig.addPassthroughCopy("src/.htaccess"); // Apache (Simply.com): custom 404 page
 
   // YYYY-MM-DD for sitemap <lastmod>.
   eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
