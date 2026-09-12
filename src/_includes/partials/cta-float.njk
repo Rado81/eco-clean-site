@@ -1,0 +1,6 @@
+{#- Floating "Få et tilbud" button. Hidden on load; base.njk's script shows it
+    after the visitor scrolls past the hero and hides it while the contact
+    section is on screen. Not rendered on the 404 page. -#}
+{%- if page.url != "/404.html" %}
+<a href="{% if page.url == '/' %}#contact{% else %}/#contact{% endif %}" class="cta-float" id="ctaFloat">Få et tilbud</a>
+{%- endif %}

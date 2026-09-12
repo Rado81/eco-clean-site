@@ -161,6 +161,111 @@ description: Erhvervsrengøring i København med over 20 års erfaring. Svanemæ
   </div>
 </section>
 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="fade-up">
+    <span class="section-label">Kontakt os</span>
+    <h2 class="section-title">Lad os tage en snak</h2>
+    <p class="section-sub">Kontakt os for et uforpligtende tilbud. Vi svarer hurtigt og glæder os til at høre om jeres behov.</p>
+  </div>
+  <div class="contact-grid fade-up">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <strong>Email</strong>
+          <span><a href="mailto:{{ site.email }}" style="color:var(--green); text-decoration:none; font-weight:600">{{ site.email }}</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <strong>Telefon</strong>
+          <span><a href="tel:50114714">50 114 714</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <strong>Hjemmeside</strong>
+          <span><a href="https://eco-clean.nu" target="_blank">eco-clean.nu</a></span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📋</div>
+        <div>
+          <strong>CVR-nummer</strong>
+          <span>45626865</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏢</div>
+        <div>
+          <strong>Selskab</strong>
+          <span>En del af Frank og Wolmer ApS</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <strong>Område</strong>
+          <span>København og omegn</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <strong>Tilgængelighed</strong>
+          <span>Fleksibel – vi tilpasser os jeres behov</span>
+        </div>
+      </div>
+    </div>
+    {%- set formAction = site.formEndpoint or ("mailto:" + site.email) %}
+    <form class="contact-form" method="POST" action="{{ formAction }}"{% if not site.formEndpoint %} enctype="text/plain"{% endif %}>
+      <h3>Skriv til os</h3>
+      {%- if site.formEndpoint %}
+      <input type="hidden" name="_subject" value="Henvendelse fra eco-clean.nu">
+      {%- endif %}
+      <div class="form-group">
+        <label for="f-navn">Navn *</label>
+        <input id="f-navn" name="navn" type="text" placeholder="Dit fulde navn" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="f-virksomhed">Virksomhed</label>
+        <input id="f-virksomhed" name="virksomhed" type="text" placeholder="Firmanavn" autocomplete="organization">
+      </div>
+      <div class="form-group">
+        <label for="f-telefon">Telefon *</label>
+        <input id="f-telefon" name="telefon" type="tel" placeholder="Dit telefonnummer" required autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label for="f-ydelse">Ydelse</label>
+        <select id="f-ydelse" name="ydelse">
+          <option value="">Vælg ydelse...</option>
+          <option>Kontorrengøring</option>
+          <option>Restaurant &amp; Café</option>
+          <option>Klinik</option>
+          <option>Fitnesscenter / Danselokale</option>
+          <option>Showroom</option>
+          <option>Trappevask &amp; Vinduespudsning</option>
+          <option>Ind- &amp; Udflytningsrengøring</option>
+          <option>Rengøring efter håndværkere</option>
+          <option>Busrengøring</option>
+          <option>Social rengøring</option>
+          <option>Dødsborengøring</option>
+          <option>Andet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-besked">Besked</label>
+        <textarea id="f-besked" name="besked" placeholder="Fortæl os om jeres behov..."></textarea>
+      </div>
+      <button class="form-submit" type="submit">Send besked</button>
+      <p class="form-fallback">Eller send en mail direkte til <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    </form>
+  </div>
+</section>
+
 <!-- VI HJÆLPER -->
 <section style="padding:80px 5%; background:white;">
   <div class="fade-up" style="max-width:1100px; margin:0 auto;">
@@ -571,111 +676,6 @@ description: Erhvervsrengøring i København med over 20 års erfaring. Svanemæ
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="fade-up">
-    <span class="section-label">Kontakt os</span>
-    <h2 class="section-title">Lad os tage en snak</h2>
-    <p class="section-sub">Kontakt os for et uforpligtende tilbud. Vi svarer hurtigt og glæder os til at høre om jeres behov.</p>
-  </div>
-  <div class="contact-grid fade-up">
-    <div class="contact-info">
-      <div class="contact-item">
-        <div class="contact-icon">📧</div>
-        <div>
-          <strong>Email</strong>
-          <span><a href="mailto:{{ site.email }}" style="color:var(--green); text-decoration:none; font-weight:600">{{ site.email }}</a></span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📞</div>
-        <div>
-          <strong>Telefon</strong>
-          <span><a href="tel:50114714">50 114 714</a></span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🌐</div>
-        <div>
-          <strong>Hjemmeside</strong>
-          <span><a href="https://eco-clean.nu" target="_blank">eco-clean.nu</a></span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📋</div>
-        <div>
-          <strong>CVR-nummer</strong>
-          <span>45626865</span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🏢</div>
-        <div>
-          <strong>Selskab</strong>
-          <span>En del af Frank og Wolmer ApS</span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">📍</div>
-        <div>
-          <strong>Område</strong>
-          <span>København og omegn</span>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-icon">🕐</div>
-        <div>
-          <strong>Tilgængelighed</strong>
-          <span>Fleksibel – vi tilpasser os jeres behov</span>
-        </div>
-      </div>
-    </div>
-    {%- set formAction = site.formEndpoint or ("mailto:" + site.email) %}
-    <form class="contact-form" method="POST" action="{{ formAction }}"{% if not site.formEndpoint %} enctype="text/plain"{% endif %}>
-      <h3>Skriv til os</h3>
-      {%- if site.formEndpoint %}
-      <input type="hidden" name="_subject" value="Henvendelse fra eco-clean.nu">
-      {%- endif %}
-      <div class="form-group">
-        <label for="f-navn">Navn *</label>
-        <input id="f-navn" name="navn" type="text" placeholder="Dit fulde navn" required autocomplete="name">
-      </div>
-      <div class="form-group">
-        <label for="f-virksomhed">Virksomhed</label>
-        <input id="f-virksomhed" name="virksomhed" type="text" placeholder="Firmanavn" autocomplete="organization">
-      </div>
-      <div class="form-group">
-        <label for="f-telefon">Telefon *</label>
-        <input id="f-telefon" name="telefon" type="tel" placeholder="Dit telefonnummer" required autocomplete="tel">
-      </div>
-      <div class="form-group">
-        <label for="f-ydelse">Ydelse</label>
-        <select id="f-ydelse" name="ydelse">
-          <option value="">Vælg ydelse...</option>
-          <option>Kontorrengøring</option>
-          <option>Restaurant &amp; Café</option>
-          <option>Klinik</option>
-          <option>Fitnesscenter / Danselokale</option>
-          <option>Showroom</option>
-          <option>Trappevask &amp; Vinduespudsning</option>
-          <option>Ind- &amp; Udflytningsrengøring</option>
-          <option>Rengøring efter håndværkere</option>
-          <option>Busrengøring</option>
-          <option>Social rengøring</option>
-          <option>Dødsborengøring</option>
-          <option>Andet</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="f-besked">Besked</label>
-        <textarea id="f-besked" name="besked" placeholder="Fortæl os om jeres behov..."></textarea>
-      </div>
-      <button class="form-submit" type="submit">Send besked</button>
-      <p class="form-fallback">Eller send en mail direkte til <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-    </form>
   </div>
 </section>
 

@@ -43,6 +43,7 @@
 {{ content | safe }}
 
 {% include "partials/footer.njk" %}
+{% include "partials/cta-float.njk" %}
 
 <script>
   // Fade-up on scroll
@@ -52,6 +53,25 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Floating "Få et tilbud" button: show after scrolling past the hero,
+  // hide while the contact section itself is on screen.
+  const ctaFloat = document.getElementById('ctaFloat');
+  if (ctaFloat) {
+    let contactVisible = false;
+    const updateCta = () => {
+      ctaFloat.classList.toggle('is-visible', window.scrollY > 300 && !contactVisible);
+    };
+    const contact = document.getElementById('contact');
+    if (contact) {
+      new IntersectionObserver((entries) => {
+        contactVisible = entries[0].isIntersecting;
+        updateCta();
+      }, { threshold: 0.15 }).observe(contact);
+    }
+    window.addEventListener('scroll', updateCta, { passive: true });
+    updateCta();
+  }
 
   function toggleMenu() {
     const menu = document.getElementById('mobileMenu');

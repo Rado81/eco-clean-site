@@ -118,6 +118,18 @@ for (const file of htmlPages()) {
     assert.ok(!html.includes("ren arbejdsplads kundetilfredshed"), "hidden keyword paragraph found");
     for (const ld of jsonLd(root)) assert.ok(ld["@context"] === "https://schema.org", "JSON-LD @context");
   });
+
+  test(`${url}: floating 'Få et tilbud' button links to the contact form`, () => {
+    const root = load(file);
+    const floats = root.querySelectorAll("a.cta-float");
+    if (url === "/404.html") {
+      assert.equal(floats.length, 0, "404 page must not show the floating button");
+      return;
+    }
+    assert.equal(floats.length, 1, "exactly one floating button");
+    assert.equal(floats[0].getAttribute("href"), url === "/" ? "#contact" : "/#contact");
+    assert.equal(floats[0].text.trim(), "Få et tilbud");
+  });
 }
 
 test("titles and meta descriptions are unique across all pages", () => {
@@ -170,6 +182,11 @@ test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
   for (const id of ["services", "om-os", "why", "eco", "contact", "omraader"]) {
     assert.ok(root.querySelector(`#${id}`), `section #${id} missing`);
   }
+  const sections = root.querySelectorAll("section");
+  const offerIdx = sections.findIndex((s) => s.classList.contains("custom-offer"));
+  const contactIdx = sections.findIndex((s) => s.getAttribute("id") === "contact");
+  assert.ok(offerIdx >= 0, "custom-offer section missing");
+  assert.equal(contactIdx, offerIdx + 1, "contact section must come directly after the custom-offer section");
 
   // Reviews strip untouched
   for (const quote of [

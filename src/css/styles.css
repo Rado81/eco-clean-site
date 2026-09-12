@@ -101,6 +101,24 @@
     transition: all 0.2s; box-shadow: 0 4px 16px rgba(45,106,45,0.3);
   }
   .btn-primary:hover { background: var(--green-light); transform: translateY(-2px); }
+  /* Floating CTA (partials/cta-float.njk) */
+  .cta-float {
+    position: fixed; right: 20px; bottom: 20px; z-index: 90;
+    background: var(--green); color: white;
+    padding: 14px 24px; border-radius: 999px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    box-shadow: 0 6px 20px rgba(45,106,45,0.35);
+    opacity: 0; transform: translateY(16px); pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s, background 0.2s;
+  }
+  .cta-float.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+  .cta-float:hover { background: var(--green-light); }
+  @media (max-width: 768px) {
+    .cta-float { right: 16px; bottom: 16px; padding: 12px 20px; font-size: 0.9rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cta-float { transition: none; transform: none; }
+  }
   .btn-secondary {
     background: white; color: var(--blue);
     padding: 14px 28px; border-radius: 8px;
