@@ -27,7 +27,7 @@ The GitHub Pages preview cannot run PHP, so preview builds (`SITE_PREVIEW=1`) fa
 
 ## Preview on GitHub Pages
 
-Every push to the `seo-multipage` branch runs `.github/workflows/pages.yml`, which runs
+Every push to the `main` branch runs `.github/workflows/pages.yml`, which runs
 `npm test`, builds with `--pathprefix=/eco-clean-site/` and `SITE_PREVIEW=1`, and publishes
 to <https://rado81.github.io/eco-clean-site/>. The preview build adds `noindex` to every page
 so search engines ignore the copy; canonical URLs still point at eco-clean.nu.
