@@ -19,6 +19,12 @@ Upload the **contents** of `_site/` to the web root of the host, replacing what 
 All pages are folders with an `index.html`, so no server configuration is required.
 `404.html` at the root is picked up by most static hosts automatically.
 
+### Contact form
+
+The form posts to `/send.php` (built from `src/send.njk`), which sends a plain-text email to `site.email` with PHP `mail()` from `noreply@eco-clean.nu` and redirects to `/tak/`. It needs PHP on the host; Simply.com provides it, so nothing has to be configured there. After each deploy, submit the form once and check that the mail arrives in info@eco-clean.nu (and the spam folder the first time).
+
+The GitHub Pages preview cannot run PHP, so preview builds (`SITE_PREVIEW=1`) fall back to a `mailto:` form. To use a hosted form service instead, set `site.json` → `formEndpoint` to its POST URL; the `_subject` hidden field and the `website` honeypot field are sent along.
+
 ## Preview on GitHub Pages
 
 Every push to the `seo-multipage` branch runs `.github/workflows/pages.yml`, which runs
@@ -49,7 +55,6 @@ so search engines ignore the copy; canonical URLs still point at eco-clean.nu.
 - **Opening hours** → `site.json`, `openingHours`. Currently an assumed Mon–Fri 08:00–16:00.
 - **Partner logos** → drop the real files in `src/assets/partners/` as `team-trees.png`, `team-seas.png`, `novak-djokovic-foundation.png` (square, at least 144×144). Placeholders are in place and are never overwritten by `npm run images`.
 - **Trustpilot profile URL** → `site.json`, `trustpilotUrl` (used only for `sameAs`).
-- **Contact form endpoint** → `site.json`, `formEndpoint`, e.g. a Formspree form URL. Until set, the form opens the visitor's mail client addressed to info@eco-clean.nu.
 - **Google Search Console** → `site.json`, `googleSiteVerification`, if the meta-tag verification method is used.
 - **Higher-resolution logo** (optional) → replace `src/assets/logo.png` and adapt `scripts/make-images.mjs` to use it for the icons and share image.
 

@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
+import { execSync } from "node:child_process";
 import { join } from "node:path";
 import { OUT, SITE_URL, pngSize, htmlPages, urlOf, load, jsonLd, typesOf, words } from "./helpers.mjs";
 
@@ -91,8 +92,8 @@ for (const file of htmlPages()) {
     assert.ok(root.querySelector('link[rel="manifest"]'), "manifest link");
 
     const robots = root.querySelector('meta[name="robots"]')?.getAttribute("content");
-    if (url === "/404.html") assert.equal(robots, "noindex");
-    else assert.equal(robots, undefined, "only the 404 page may be noindex");
+    if (url === "/404.html" || url === "/tak/") assert.equal(robots, "noindex");
+    else assert.equal(robots, undefined, "only the 404 and /tak/ pages may be noindex");
   });
 
   test(`${url}: heading structure, images and hidden-text hygiene`, () => {
@@ -122,8 +123,8 @@ for (const file of htmlPages()) {
   test(`${url}: floating 'Få et tilbud' button links to the contact form`, () => {
     const root = load(file);
     const floats = root.querySelectorAll("a.cta-float");
-    if (url === "/404.html") {
-      assert.equal(floats.length, 0, "404 page must not show the floating button");
+    if (url === "/404.html" || url === "/tak/") {
+      assert.equal(floats.length, 0, `${url} must not show the floating button`);
       return;
     }
     assert.equal(floats.length, 1, "exactly one floating button");
@@ -211,7 +212,14 @@ test("/ home page: structure, links, JSON-LD and removed spam blocks", () => {
   const form = root.querySelector("form.contact-form");
   assert.ok(form, "contact form missing");
   assert.equal(form.getAttribute("method")?.toLowerCase(), "post");
-  assert.ok(form.getAttribute("action"), "form action missing");
+  assert.equal(form.getAttribute("action"), "/send.php", "form must post to the PHP mailer");
+  assert.equal(form.getAttribute("enctype"), undefined, "no text/plain enctype on a real POST");
+  assert.ok(form.querySelector('input[type="hidden"][name="_subject"]'), "_subject hidden field");
+  const honey = form.querySelector('input[name="website"]');
+  assert.ok(honey, "honeypot field missing");
+  assert.equal(honey.getAttribute("tabindex"), "-1");
+  assert.equal(honey.getAttribute("autocomplete"), "off");
+  assert.equal(honey.closest("[aria-hidden='true']") != null, true, "honeypot must be aria-hidden");
   for (const name of ["navn", "virksomhed", "telefon", "ydelse", "besked"]) {
     assert.ok(form.querySelector(`[name="${name}"]`), `field ${name} missing`);
   }
@@ -278,13 +286,50 @@ test("sitemap.xml lists every indexable page once with an ISO lastmod", () => {
   const expected = ["/", "/om-os/", ...services.filter((s) => s.hasPage).map((s) => `/ydelser/${s.slug}/`)].map((u) => SITE_URL + u);
   assert.deepEqual([...locs].sort(), [...expected].sort());
   assert.ok(!xml.includes("404"), "404 page must not be in the sitemap");
+  assert.ok(!xml.includes("/tak/"), "thank-you page must not be in the sitemap");
   const mods = [...xml.matchAll(/<lastmod>(.*?)<\/lastmod>/g)].map((m) => m[1]);
   assert.equal(mods.length, locs.length);
   for (const m of mods) assert.match(m, /^\d{4}-\d{2}-\d{2}$/);
   // every built page except 404 is in the sitemap
   for (const page of htmlPages()) {
     const url = urlOf(page);
-    if (url === "/404.html") continue;
+    if (url === "/404.html" || url === "/tak/") continue;
     assert.ok(locs.includes(SITE_URL + url), `${url} missing from sitemap`);
   }
+});
+
+test("send.php: PHP mailer is built with the site email and a honeypot check", () => {
+  const file = "_site/send.php";
+  assert.ok(existsSync(file), "send.php not built");
+  const php = readFileSync(file, "utf8");
+  assert.ok(php.startsWith("<?php"), "must start with <?php");
+  assert.ok(php.includes("'info@eco-clean.nu'"), "recipient from site.json");
+  assert.ok(/\bmail\(/.test(php), "calls mail()");
+  assert.ok(php.includes("$_POST['website']"), "checks the honeypot field");
+  assert.ok(php.includes("'/tak/'"), "redirects to /tak/ on success");
+  assert.ok(!php.includes("{{") && !php.includes("{%"), "unrendered nunjucks in PHP");
+  assert.ok(!php.includes("\r"), "PHP must use LF line endings");
+});
+
+test("/tak/: thank-you page is built, noindex and links back", () => {
+  const file = "_site/tak/index.html";
+  assert.ok(existsSync(file), "thank-you page not built");
+  const root = load(file);
+  assert.equal(root.querySelector("h1").text.trim(), "Tak for din henvendelse");
+  assert.equal(root.querySelector('meta[name="robots"]')?.getAttribute("content"), "noindex");
+  assert.ok(root.querySelector('a[href="/"]'), "link back to the front page");
+  assert.equal(root.querySelectorAll("a.cta-float").length, 0, "no floating CTA on the thank-you page");
+});
+
+test("preview build (SITE_PREVIEW=1) falls back to mailto because GitHub Pages cannot run PHP", () => {
+  const out = "_verify/preview-form";
+  execSync(`npx @11ty/eleventy --quiet --output=${out} --pathprefix=/eco-clean-site/`, {
+    env: { ...process.env, SITE_PREVIEW: "1" },
+    stdio: "pipe",
+  });
+  const root = load(`${out}/index.html`);
+  const form = root.querySelector("form.contact-form");
+  assert.equal(form.getAttribute("action"), "mailto:info@eco-clean.nu");
+  assert.equal(form.getAttribute("enctype"), "text/plain");
+  assert.ok(!form.querySelector('input[name="website"]'), "no honeypot on the mailto fallback");
 });

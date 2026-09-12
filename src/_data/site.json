@@ -25,7 +25,7 @@
   "areaServed": ["København", "Frederiksberg", "Storkøbenhavn", "Nordsjælland", "Vestegnen", "Amager"],
   "areaServedLabel": "København og omegn",
   "trustpilotUrl": "",
-  "formEndpoint": "",
+  "formEndpoint": "/send.php",
   "googleSiteVerification": "",
   "ogImage": "/assets/og-image.png"
 }

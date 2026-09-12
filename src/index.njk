@@ -220,11 +220,21 @@ description: Erhvervsrengøring i København med over 20 års erfaring. Svanemæ
         </div>
       </div>
     </div>
-    {%- set formAction = site.formEndpoint or ("mailto:" + site.email) %}
-    <form class="contact-form" method="POST" action="{{ formAction }}"{% if not site.formEndpoint %} enctype="text/plain"{% endif %}>
+    {#- A root-relative endpoint (/send.php) needs PHP on the host. The GitHub
+        Pages preview cannot run it, so the preview keeps the mailto fallback. -#}
+    {%- set formAction = site.formEndpoint %}
+    {%- if not formAction or (env.preview and formAction[0] == "/") %}
+      {%- set formAction = "mailto:" + site.email %}
+    {%- endif %}
+    {%- set mailtoForm = formAction[0] == "m" %}
+    <form class="contact-form" method="POST" action="{{ formAction }}"{% if mailtoForm %} enctype="text/plain"{% endif %}>
       <h3>Skriv til os</h3>
-      {%- if site.formEndpoint %}
+      {%- if not mailtoForm %}
       <input type="hidden" name="_subject" value="Henvendelse fra eco-clean.nu">
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Website</label>
+        <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
       {%- endif %}
       <div class="form-group">
         <label for="f-navn">Navn *</label>

@@ -697,6 +697,8 @@
 }
 .service-card .card-link:hover { text-decoration: underline; }
 .footer-heading { color: white; font-weight: 700; font-size: 0.92rem; margin-bottom: 16px; }
+/* Honeypot: off-screen for people, present for bots (send.php drops filled ones) */
+.hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 .form-fallback { font-size: 0.82rem; color: var(--gray); margin-top: 12px; text-align: center; }
 .form-fallback a { color: var(--green); font-weight: 600; text-decoration: none; }
 .areas-title {
