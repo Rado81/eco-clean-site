@@ -163,6 +163,9 @@
 
   /* SECTION COMMON */
   section { padding: 96px 5%; }
+  /* Anchored sections (#contact, #services, ...) stop below the fixed nav
+     instead of sliding under it. Height matches the nav per breakpoint. */
+  section[id] { scroll-margin-top: 72px; }
   .section-label {
     display: inline-block; color: var(--green);
     font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
@@ -499,8 +502,11 @@
     .why-grid { grid-template-columns: 1fr; gap: 32px; }
     .why-visual { padding: 28px; }
 
-    /* Contact */
+    /* Contact: on phones the form comes first so "Få et tilbud" lands on
+       "Skriv til os" instead of on seven contact cards above it. */
     .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-form { order: -1; }
+    section[id] { scroll-margin-top: 60px; }
     .contact-form { padding: 24px 20px; }
 
     /* Footer */
@@ -547,6 +553,7 @@
     .hero h1 { font-size: 1.9rem; }
     nav:not(.breadcrumb) { height: 56px; }
     .mobile-menu { top: 56px; }
+    section[id] { scroll-margin-top: 56px; }
   }
 
 
